@@ -3,7 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IN France — Simulateur d'impact territorial</title>
+
+<!-- ─── SEO Primaire ──────────────────────────────────────────────────── -->
+<title>Simulateur d'impact territorial | IN France — Mesurez l'impact économique de votre entreprise</title>
+<meta name="description" content="Calculez en 30 secondes les emplois, la valeur ajoutée et les contributions fiscales générées par votre entreprise dans l'économie française. Simulation gratuite basée sur les données BdF, OCDE et Eurostat.">
+<meta name="keywords" content="impact territorial entreprise, simulateur impact économique, emplois induits France, valeur ajoutée entreprise, multiplicateur emploi, impact fiscal entreprise, analyse territoriale, RSE impact local">
+<meta name="author" content="IN France">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://simulateur.in-france.fr/">
+
+<!-- ─── Open Graph (LinkedIn, Facebook, WhatsApp) ─────────────────────── -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://simulateur.in-france.fr/">
+<meta property="og:title"       content="Simulateur d'impact territorial — IN France">
+<meta property="og:description" content="Votre entreprise crée plus de valeur que vous ne pensez. Calculez emplois, valeur ajoutée et contributions fiscales en 30 secondes. Gratuit.">
+<meta property="og:image"       content="https://simulateur.in-france.fr/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale"      content="fr_FR">
+<meta property="og:site_name"   content="IN France">
+
+<!-- ─── Twitter Card ─────────────────────────────────────────────────── -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="Simulateur d'impact territorial — IN France">
+<meta name="twitter:description" content="Calculez l'impact économique réel de votre entreprise sur la France. Emplois, VA, taxes — en 30 secondes, gratuitement.">
+<meta name="twitter:image"       content="https://simulateur.in-france.fr/og-image.png">
+
+<!-- ─── Schema.org WebApplication ────────────────────────────────────── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Simulateur d'impact territorial IN France",
+  "url": "https://simulateur.in-france.fr/",
+  "description": "Outil de simulation de l'impact territorial d'une entreprise française : emplois directs, indirects et induits, valeur ajoutée, contributions fiscales et multiplicateur d'emploi.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR",
+    "description": "Simulation gratuite"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "IN France",
+    "url": "https://www.in-france.fr"
+  },
+  "featureList": [
+    "Calcul d'impact direct via ratios BdF FIBEN",
+    "Calcul d'impact indirect via matrice Leontief OCDE ICIO",
+    "Calcul d'impact induit via Eurostat HBS",
+    "Comparaison sectorielle et nationale",
+    "Rapport envoyé par email"
+  ],
+  "inLanguage": "fr"
+}
+</script>
+
+<!-- ─── Fonts ──────────────────────────────────────────────────────────── -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -1505,7 +1563,7 @@ async function calculate() {
     const res  = await fetch(API_URL, {
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ siren, ca })
+      body: JSON.stringify({ siren, ca, email: email || undefined })
     });
     const data = await res.json();
     if (!res.ok) { showAlert(data.error||`Erreur ${res.status}`); return; }
