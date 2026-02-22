@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IN France — Simulateur d'impact territorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #0d1b2a;
+    --card: #ffffff;
+    --muted: #f3f5f9;
+    --muted-fg: #64748b;
+    --border: #dde3ee;
+    --radius: 6px;
+    --fr-blue: #002395;
+    --fr-red:  #ED2939;
+    --green: #16a34a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Geist', -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── HEADER ─────────────────────────────────────────────────── */
+  header {
+    border-bottom: 1px solid var(--border);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 24px;
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+
+  /* Logo: IN bleu + France rouge */
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    text-decoration: none;
+    user-select: none;
+  }
+
+  .logo-in {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: var(--fr-blue);
+  }
+
+  .logo-france {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: var(--fr-red);
+  }
+
+  .header-sep { width: 1px; height: 18px; background: var(--border); }
+
+  .nav { display: flex; gap: 2px; }
+  .nav-link {
+    padding: 4px 10px;
+    font-size: 13px;
+    color: var(--muted-fg);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .12s;
+  }
+  .nav-link:hover, .nav-link.active { background: var(--muted); color: var(--fg); font-weight: 500; }
+
+  .header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 9px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 11px;
+    color: var(--muted-fg);
+    font-family: 'Geist Mono', monospace;
+  }
+
+  .chip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+
+  /* Bouton CTA header */
+  .btn-demo {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 14px;
+    background: var(--fr-blue);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .15s;
+    white-space: nowrap;
+  }
+
+  .btn-demo:hover { background: #001c7a; transform: translateY(-1px); }
+
+  /* ─── HERO ───────────────────────────────────────────────────── */
+  .hero {
+    background: var(--bg);
+    color: var(--fg);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Bande tricolore top */
+  .tricolor-top {
+    display: flex;
+    height: 3px;
+  }
+  .tricolor-top div:nth-child(1) { flex:1; background: var(--fr-blue); }
+  .tricolor-top div:nth-child(2) { flex:1; background: #e8e8e8; }
+  .tricolor-top div:nth-child(3) { flex:1; background: var(--fr-red); }
+
+  /* Grille de fond très subtile */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 52px 52px;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  /* Lueur bleue bas-gauche très douce */
+  .hero-glow {
+    position: absolute;
+    bottom: -30%; left: -5%;
+    width: 500px; height: 500px;
+    background: radial-gradient(ellipse, rgba(0,35,149,.05) 0%, transparent 68%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 68px 32px 72px;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .hero-left {}
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: 18px;
+  }
+
+  .hero-eyebrow-bar { width: 20px; height: 1px; background: var(--border); }
+
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    line-height: 1.1;
+    margin-bottom: 18px;
+    color: var(--fg);
+  }
+
+  .hero h1 .h1-accent {
+    background: linear-gradient(120deg, var(--fr-blue) 0%, var(--fr-red) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--muted-fg);
+    line-height: 1.65;
+    margin-bottom: 32px;
+    max-width: 420px;
+  }
+
+  .hero-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero-bullet {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+
+  .hero-bullet-icon {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #eef1ff;
+    border: 1px solid #c5cffa;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    font-size: 10px;
+    color: var(--fr-blue);
+  }
+
+  /* Colonne droite — formulaire */
+  .hero-form-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0,35,149,.06), 0 1px 4px rgba(0,0,0,.04);
+    padding: 28px 24px;
+  }
+
+  .hero-form-card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 4px;
+  }
+
+  .hero-form-card-sub {
+    font-size: 12px;
+    color: var(--muted-fg);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .free-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #15803d;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Champs dans le formulaire */
+  .hf-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+
+  .hf-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted-fg);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .hf-input-wrap { position: relative; }
+
+  .hf-input {
+    width: 100%;
+    height: 38px;
+    padding: 0 38px 0 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+    color: var(--fg);
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+
+  .hf-input::placeholder { color: #a0aec0; }
+  .hf-input:focus {
+    border-color: var(--fr-blue);
+    box-shadow: 0 0 0 3px rgba(0,35,149,.08);
+  }
+
+  .hf-input-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    color: var(--muted-fg);
+    font-family: 'Geist Mono', monospace;
+    pointer-events: none;
+    transition: color .15s;
+  }
+
+  .hf-input-icon.ok   { color: var(--green); }
+  .hf-input-icon.err  { color: var(--fr-red); }
+  .hf-input-icon.spin { animation: blink .8s steps(1) infinite; }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+  /* Dropdown autocomplete (dans le hero) */
+  .hf-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0; right: 0;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 24px rgba(0,0,0,.14);
+    z-index: 300;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+  }
+
+  .hf-dropdown.open { display: block; }
+
+  .hf-ac-item {
+    padding: 9px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background .1s;
+  }
+
+  .hf-ac-item:last-child { border-bottom: none; }
+  .hf-ac-item:hover, .hf-ac-item.focused { background: var(--muted); }
+
+  .hf-ac-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  .hf-ac-meta {
+    font-size: 11px;
+    color: var(--muted-fg);
+    font-family: 'Geist Mono', monospace;
+    margin-top: 1px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .hf-ac-empty {
+    padding: 12px;
+    font-size: 13px;
+    color: var(--muted-fg);
+    text-align: center;
+  }
+
+  /* Company found chip */
+  .hf-company-chip {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #15803d;
+    margin-top: 4px;
+  }
+  .hf-company-chip.show { display: flex; }
+  .hf-company-chip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .hf-company-chip-naf {
+    margin-left: auto;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    background: #dcfce7;
+    color: #15803d;
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  .hf-input-mono { font-family: 'Geist Mono', monospace; }
+
+  .hf-email-note {
+    font-size: 11px;
+    color: var(--muted-fg);
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* CTA button */
+  .cta-btn {
+    width: 100%;
+    height: 42px;
+    background: var(--fr-red);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Geist', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+    letter-spacing: -0.1px;
+  }
+
+  .cta-btn:hover:not(:disabled) { background: #d42233; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(237,41,57,.35); }
+  .cta-btn:active { transform: none; }
+  .cta-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .cta-spinner {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,.25);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin .5s linear infinite;
+    display: none;
+  }
+
+  .cta-btn.loading .cta-spinner { display: block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .cta-privacy {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted-fg);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* Hero alert */
+  .hf-alert {
+    display: none;
+    align-items: flex-start;
+    gap: 7px;
+    padding: 8px 11px;
+    background: #fff0f1;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--fr-red);
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+  .hf-alert.show { display: flex; }
+
+  /* ─── TRUST BAR ──────────────────────────────────────────────── */
+  .trust-bar {
+    background: #f8f9fc;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--muted-fg);
+    font-weight: 400;
+  }
+
+  .trust-item strong { color: var(--fg); font-weight: 600; }
+
+  .trust-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--border); }
+
+  /* ─── RESULTS SECTION ────────────────────────────────────────── */
+  .results-section {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 40px 32px 100px;
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeUp .35s ease;
+  }
+
+  .results-section.show { display: flex; }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(10px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* Result header */
+  .res-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Mini drapeau */
+  .fr-flag {
+    display: flex;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.12);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .fr-flag div { width: 13px; height: 20px; }
+  .fr-flag div:nth-child(1) { background: var(--fr-blue); }
+  .fr-flag div:nth-child(2) { background: #eee; }
+  .fr-flag div:nth-child(3) { background: var(--fr-red); }
+
+  .res-company {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  .res-meta { font-size: 13px; color: var(--muted-fg); margin-top: 3px; }
+
+  .tricolor-accent {
+    display: flex;
+    height: 2px;
+    width: 80px;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .tricolor-accent div { flex: 1; }
+
+  /* ─── KPI GRID ───────────────────────────────────────────────── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .kpi {
+    background: var(--bg);
+    padding: 20px;
+  }
+
+  .kpi-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted-fg);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 8px;
+  }
+
+  .kpi-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  .kpi-value {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    line-height: 1;
+    margin-bottom: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .kpi-sub { font-size: 12px; color: var(--muted-fg); font-family: 'Geist Mono', monospace; }
+
+  .kpi-bench {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .bench-sep { font-size: 10px; color: var(--border); }
+
+  .bench-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: 'Geist Mono', monospace;
+    border: 1px solid;
+  }
+
+  .bench-tag.above { background: #eef1ff; color: var(--fr-blue); border-color: #c5cffa; }
+  .bench-tag.below { background: #fff0f1; color: var(--fr-red);  border-color: #fcc; }
+  .bench-tag.label { background: none; border: none; color: var(--muted-fg); font-family: 'Geist', sans-serif; font-size: 10px; padding: 0; font-weight: 400; }
+
+  /* ─── MULTIPLIER ─────────────────────────────────────────────── */
+  .mult-banner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 24px;
+    background: var(--fr-blue);
+    border-radius: var(--radius);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mult-banner::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 5px;
+    background: var(--fr-red);
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+
+  .mult-num {
+    font-size: 46px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 1;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mult-num .mult-x { color: rgba(255,255,255,.25); font-weight: 300; }
+
+  .mult-body { flex: 1; }
+  .mult-title { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .mult-desc { font-size: 12px; color: rgba(255,255,255,.5); line-height: 1.55; }
+  .mult-desc strong { color: rgba(255,255,255,.9); font-weight: 500; }
+
+  .mult-bench {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex-shrink: 0;
+    border-left: 1px solid rgba(255,255,255,.1);
+    padding-left: 24px;
+    min-width: 155px;
+  }
+
+  .mult-bench-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+  }
+
+  .mult-bench-row span:first-child { color: rgba(255,255,255,.4); }
+  .mult-bench-row span:last-child  { font-family: 'Geist Mono', monospace; font-weight: 500; color: rgba(255,255,255,.75); }
+
+  /* ─── TWO COLS ───────────────────────────────────────────────── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* ─── CARD ───────────────────────────────────────────────────── */
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+  }
+
+  .card-head {
+    padding: 13px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-title { font-size: 13px; font-weight: 600; }
+  .card-desc  { font-size: 12px; color: var(--muted-fg); }
+  .card-body  { padding: 18px; }
+
+  /* ─── TABLE ──────────────────────────────────────────────────── */
+  .tbl { width: 100%; border-collapse: collapse; }
+
+  .tbl thead th {
+    text-align: right;
+    padding: 0 10px 9px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted-fg);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tbl thead th:first-child { text-align: left; padding-left: 0; }
+
+  .tbl tbody td {
+    padding: 9px 10px;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+  }
+
+  .tbl tbody td:first-child {
+    text-align: left;
+    padding-left: 0;
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+  }
+
+  .tbl tbody tr:last-child td { border-bottom: none; }
+
+  .tbl tbody tr.total td {
+    border-top: 1px solid var(--fg);
+    border-bottom: none;
+    font-weight: 700;
+    padding-top: 11px;
+  }
+
+  .layer-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+    position: relative; top: -1px;
+  }
+
+  /* ─── RADAR ──────────────────────────────────────────────────── */
+  .radar-wrap {
+    width: 100%;
+    aspect-ratio: 1;
+    max-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .radar-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 14px;
+  }
+
+  .radar-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted-fg);
+  }
+
+  .radar-legend-line {
+    width: 16px; height: 2px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ─── SECTORS ────────────────────────────────────────────────── */
+  .sectors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 6px;
+  }
+
+  .sector-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 10px;
+    background: var(--muted);
+    border-radius: 4px;
+  }
+
+  .sector-left {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--muted-fg);
+    font-size: 12px;
+  }
+
+  .sector-pill {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    background: var(--border);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  .sector-val {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  /* ─── CTA RENDEZ-VOUS RÉSULTATS ──────────────────────────────── */
+  .results-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px 28px;
+    background: linear-gradient(135deg, #001c7a 0%, var(--fr-blue) 60%, #1a3fa8 100%);
+    border-radius: var(--radius);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .results-cta::before {
+    content: '';
+    position: absolute;
+    top: -40%; right: -5%;
+    width: 280px; height: 280px;
+    background: radial-gradient(ellipse, rgba(237,41,57,.2) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .results-cta-left { flex: 1; position: relative; z-index: 1; }
+
+  .results-cta-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+    margin-bottom: 6px;
+  }
+
+  .results-cta-title {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .results-cta-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,.6);
+    line-height: 1.5;
+    max-width: 420px;
+  }
+
+  .results-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 40px;
+    padding: 0 20px;
+    background: var(--fr-red);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .15s, box-shadow .15s, transform .12s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.1px;
+  }
+
+  .results-cta-btn:hover {
+    background: #d42233;
+    box-shadow: 0 4px 20px rgba(237,41,57,.4);
+    transform: translateY(-1px);
+  }
+
+  /* ─── SIMULATION DISCLAIMER ──────────────────────────────────── */
+  .sim-disclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 18px;
+    background: #f8f9fc;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--fr-blue);
+    border-radius: var(--radius);
+    font-size: 13px;
+    color: var(--muted-fg);
+    line-height: 1.55;
+  }
+
+  .sim-disclaimer-icon {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #eef1ff;
+    border: 1px solid #c5cffa;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 11px;
+    color: var(--fr-blue);
+    font-weight: 700;
+  }
+
+  .sim-disclaimer strong { color: var(--fg); font-weight: 600; }
+
+  .sim-disclaimer a {
+    color: var(--fr-blue);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(0,35,149,.25);
+  }
+
+  .sim-disclaimer a:hover { border-bottom-color: var(--fr-blue); }
+  .email-sent-banner {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: var(--radius);
+    font-size: 13px;
+    color: var(--green);
+  }
+
+  .email-sent-banner.show { display: flex; }
+
+  /* ─── FOOTER ─────────────────────────────────────────────────── */
+  .res-foot {
+    font-size: 11px;
+    color: var(--muted-fg);
+    font-family: 'Geist Mono', monospace;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 48px 20px 52px; }
+    .hero h1 { font-size: 30px; }
+    .kpi-grid { grid-template-columns: 1fr; }
+    .two-col  { grid-template-columns: 1fr; }
+    .mult-banner { flex-direction: column; gap: 16px; }
+    .mult-bench { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,.1); padding-top: 16px; width: 100%; flex-direction: row; flex-wrap: wrap; gap: 12px; min-width: 0; }
+    header { padding: 0 16px; }
+    .trust-bar { padding: 12px 16px; gap: 16px; }
+    .results-section { padding: 28px 16px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">
+    <span class="logo-in">IN</span>
+    <span class="logo-france">France</span>
+  </a>
+  <div class="header-sep"></div>
+  <nav class="nav">
+    <div class="nav-link active">Simulateur</div>
+    <a class="nav-link" href="methodologie.html">Méthodologie</a>
+    <a class="nav-link" href="https://www.in-france.fr/a-propos" target="_blank">À propos</a>
+  </nav>
+  <div class="header-right">
+    <div class="chip"><div class="chip-dot"></div>API live</div>
+    <a class="btn-demo" href="https://www.in-france.fr/demo" target="_blank">
+      Prendre rendez-vous →
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="tricolor-top"><div></div><div></div><div></div></div>
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-inner">
+
+    <!-- Gauche: pitch -->
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-bar"></div>
+        Simulateur d'impact territorial
+      </div>
+      <h1>Votre entreprise<br>crée plus de valeur<br>que vous ne <span class="h1-accent">pensez.</span></h1>
+      <p class="hero-sub">
+        Chaque euro de chiffre d'affaires déclenche une chaîne invisible —
+        emplois, salaires, taxes — dans toute l'économie française.
+        Mesurez-la en 30 secondes.
+      </p>
+      <div class="hero-bullets">
+        <div class="hero-bullet">
+          <div class="hero-bullet-icon">✓</div>
+          Impact direct, indirect et induit calculé
+        </div>
+        <div class="hero-bullet">
+          <div class="hero-bullet-icon">✓</div>
+          Comparaison vs. votre secteur et la moyenne nationale
+        </div>
+        <div class="hero-bullet">
+          <div class="hero-bullet-icon">✓</div>
+          Résultats envoyés gratuitement par email
+        </div>
+      </div>
+    </div>
+
+    <!-- Droite: formulaire -->
+    <div class="hero-form-card">
+      <div class="hero-form-card-title">Lancez votre simulation</div>
+      <div class="hero-form-card-sub">
+        <span class="free-badge">✦ Gratuit</span>
+        Résultats instantanés · Aucun engagement
+      </div>
+
+      <!-- Champ unifié entreprise -->
+      <div class="hf-field">
+        <label class="hf-label" for="searchInput">Entreprise (nom ou SIREN)</label>
+        <div class="hf-input-wrap">
+          <input class="hf-input" type="text" id="searchInput"
+            placeholder="Ex : Bouygues ou 572015246"
+            autocomplete="off" spellcheck="false">
+          <span class="hf-input-icon" id="searchIcon"></span>
+          <div class="hf-dropdown" id="acDropdown"></div>
+        </div>
+        <div class="hf-company-chip" id="companyChip">
+          <div class="hf-company-chip-dot"></div>
+          <span id="chipName"></span>
+          <span class="hf-company-chip-naf" id="chipNaf"></span>
+        </div>
+      </div>
+
+      <!-- CA -->
+      <div class="hf-field">
+        <label class="hf-label" for="caInput">Chiffre d'affaires annuel HT</label>
+        <div class="hf-input-wrap">
+          <input class="hf-input hf-input-mono" type="text" id="caInput"
+            placeholder="5 000 000">
+          <span class="hf-input-icon">€</span>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="hf-field">
+        <label class="hf-label" for="emailInput">Email — recevez vos résultats</label>
+        <div class="hf-input-wrap">
+          <input class="hf-input" type="email" id="emailInput"
+            placeholder="vous@entreprise.fr">
+          <span class="hf-input-icon">✉</span>
+        </div>
+        <div class="hf-email-note">
+          🔒 Confidentiel · Jamais revendu · Vous pouvez vous désabonner à tout moment
+        </div>
+      </div>
+
+      <button class="cta-btn" id="ctaBtn" onclick="calculate()">
+        <div class="cta-spinner"></div>
+        <span class="cta-label">Simuler l'impact →</span>
+      </button>
+
+      <div class="cta-privacy">
+        Simulation 100 % gratuite · Basée sur les données BdF, OCDE & Eurostat
+      </div>
+
+      <div class="hf-alert" id="heroAlert">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span id="alertText"></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <strong>BdF FIBEN</strong> <span>Ratios sectoriels 2024</span>
+  </div>
+  <div class="trust-dot"></div>
+  <div class="trust-item">
+    <strong>OCDE ICIO</strong> <span>Matrices Leontief 2023</span>
+  </div>
+  <div class="trust-dot"></div>
+  <div class="trust-item">
+    <strong>Eurostat HBS</strong> <span>Consommation ménages 2020</span>
+  </div>
+  <div class="trust-dot"></div>
+  <div class="trust-item">
+    <strong>INSEE SIRENE</strong> <span>Base entreprises officielle</span>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="results-section" id="results">
+
+  <!-- Email sent banner -->
+  <div class="email-sent-banner" id="emailBanner">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/>
+    </svg>
+    <span id="emailBannerText">Rapport envoyé à —</span>
+  </div>
+
+  <!-- Header -->
+  <div class="res-header">
+    <div class="fr-flag"><div></div><div></div><div></div></div>
+    <div>
+      <div class="res-company" id="resCompany">—</div>
+      <div class="res-meta" id="resMeta">—</div>
+      <div class="tricolor-accent">
+        <div style="background:var(--fr-blue)"></div>
+        <div style="background:#ddd"></div>
+        <div style="background:var(--fr-red)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label"><div class="kpi-dot" style="background:var(--fr-blue)"></div>Emplois générés</div>
+      <div class="kpi-value" id="kpiEmplois">—</div>
+      <div class="kpi-sub" id="kpiEmploisSub">—</div>
+      <div class="kpi-bench" id="kpiBenchEmplois"></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label"><div class="kpi-dot" style="background:#7088b8"></div>Valeur ajoutée</div>
+      <div class="kpi-value" id="kpiVa">—</div>
+      <div class="kpi-sub" id="kpiVaSub">—</div>
+      <div class="kpi-bench" id="kpiBenchVa"></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label"><div class="kpi-dot" style="background:var(--fr-red)"></div>Contributions fiscales</div>
+      <div class="kpi-value" id="kpiTaxes">—</div>
+      <div class="kpi-sub" id="kpiTaxesSub">—</div>
+      <div class="kpi-bench" id="kpiBenchTaxes"></div>
+    </div>
+  </div>
+
+  <!-- Multiplier -->
+  <div class="mult-banner">
+    <div class="mult-num" id="multNum">—<span class="mult-x">×</span></div>
+    <div class="mult-body">
+      <div class="mult-title">Multiplicateur d'emploi</div>
+      <div class="mult-desc">
+        Pour 1 emploi direct, <strong id="multExtra">—</strong> emplois supplémentaires
+        générés dans l'économie française via les achats intermédiaires et la consommation des ménages.
+      </div>
+    </div>
+    <div class="mult-bench" id="multBench"></div>
+  </div>
+
+  <!-- CTA Rendez-vous -->
+  <div class="results-cta">
+    <div class="results-cta-left">
+      <div class="results-cta-eyebrow">Passez à l'étape suivante</div>
+      <div class="results-cta-title">Transformez cette simulation en rapport complet</div>
+      <div class="results-cta-sub">
+        Nos experts analysent la structure réelle de votre entreprise et produisent
+        un rapport d'impact territorial sur-mesure — pour vos investisseurs, collectivités ou partenaires.
+      </div>
+    </div>
+    <a class="results-cta-btn" href="https://www.in-france.fr/demo" target="_blank">
+      Prendre rendez-vous →
+    </a>
+  </div>
+
+  <!-- Table + Radar -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Décomposition de l'impact</div>
+        <div class="card-desc">Direct · Indirect (Leontief) · Induit (HBS)</div>
+      </div>
+      <div class="card-body">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Couche</th><th>Valeur ajoutée</th><th>Salaires</th><th>Emplois</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="layer-dot" style="background:var(--fr-blue)"></span>Direct</td>
+              <td id="d-va">—</td><td id="d-sal">—</td><td id="d-emp">—</td>
+            </tr>
+            <tr>
+              <td><span class="layer-dot" style="background:#7088b8"></span>Indirect</td>
+              <td id="i-va">—</td><td id="i-sal">—</td><td id="i-emp">—</td>
+            </tr>
+            <tr>
+              <td><span class="layer-dot" style="background:var(--fr-red)"></span>Induit</td>
+              <td id="u-va">—</td><td id="u-sal">—</td><td id="u-emp">—</td>
+            </tr>
+            <tr class="total">
+              <td>Total</td>
+              <td id="t-va">—</td><td id="t-sal">—</td><td id="t-emp">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Profil de performance</div>
+        <div class="card-desc">vs. secteur · vs. nationale</div>
+      </div>
+      <div class="card-body">
+        <div class="radar-wrap">
+          <canvas id="radarChart"></canvas>
+        </div>
+        <div class="radar-legend">
+          <div class="radar-legend-item">
+            <div class="radar-legend-line" style="background:rgba(0,35,149,.85)"></div>
+            <span>Entreprise analysée</span>
+          </div>
+          <div class="radar-legend-item">
+            <div class="radar-legend-line" style="background:rgba(237,41,57,.65)"></div>
+            <span>Moy. sectorielle — <span id="legendSector">—</span></span>
+          </div>
+          <div class="radar-legend-item">
+            <div class="radar-legend-line" style="background:rgba(100,116,139,.4)"></div>
+            <span>Moy. nationale</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sectors -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">Secteurs activés indirectement</div>
+      <div class="card-desc">Production induite par section NAF</div>
+    </div>
+    <div class="card-body">
+      <div class="sectors-grid" id="sectorsGrid"></div>
+    </div>
+  </div>
+
+  <div class="res-foot" id="resFoot"></div>
+
+  <!-- Simulation disclaimer -->
+  <div class="sim-disclaimer">
+    <div class="sim-disclaimer-icon">i</div>
+    <div>
+      <strong>Résultats indicatifs — Simulation basée sur notre méthodologie.</strong>
+      Les chiffres présentés sont des estimations calculées à partir des ratios sectoriels
+      BdF FIBEN 2024, de la matrice Leontief OCDE ICIO 2023 et des données de consommation
+      Eurostat HBS 2020. Ils ne constituent pas un bilan comptable ou un audit économique.
+      Les effets indirects et induits reposent sur des moyennes sectorielles nationales
+      et peuvent varier selon la structure réelle de l'entreprise.
+      <a href="#">En savoir plus sur la méthodologie →</a>
+    </div>
+  </div>
+
+</div><!-- /results -->
+
+<script>
+// ─── CONFIG ──────────────────────────────────────────────────────────────────
+const API_URL = "https://obdxlomdseakyefovwvt.supabase.co/functions/v1/impact";
+
+const NAF_LABELS = {
+  A:"Agriculture", B:"Ind. extractives", C:"Industrie manufact.",
+  D:"Énergie", E:"Eau & déchets", F:"Construction", G:"Commerce",
+  H:"Transports", I:"Héberg. & restauration", J:"Info. & communication",
+  K:"Finance", L:"Immobilier", M:"Services spécialisés",
+  N:"Services admin.", O:"Administration", P:"Enseignement",
+  Q:"Santé & social", R:"Arts & loisirs", S:"Autres services"
+};
+
+const BENCH_NAT = {
+  multiplicateur:1.82, va_sur_ca:32.1, emplois_par_mca:14.2,
+  part_salaires:55.4,  part_taxes:12.8, indirect_pct:38.2
+};
+
+const BENCH_SEC = {
+  A:{multiplicateur:2.15,va_sur_ca:28.0,emplois_par_mca:21.0,part_salaires:44.0,part_taxes:10.0,indirect_pct:40.0},
+  B:{multiplicateur:1.60,va_sur_ca:45.0,emplois_par_mca:10.5,part_salaires:42.0,part_taxes:14.0,indirect_pct:32.0},
+  C:{multiplicateur:2.10,va_sur_ca:28.5,emplois_par_mca:13.8,part_salaires:58.0,part_taxes:11.0,indirect_pct:42.0},
+  D:{multiplicateur:1.45,va_sur_ca:72.0,emplois_par_mca:3.2, part_salaires:15.0,part_taxes:28.0,indirect_pct:25.0},
+  E:{multiplicateur:1.75,va_sur_ca:38.0,emplois_par_mca:13.0,part_salaires:52.0,part_taxes:15.0,indirect_pct:35.0},
+  F:{multiplicateur:2.25,va_sur_ca:38.5,emplois_par_mca:19.5,part_salaires:68.0,part_taxes:9.5, indirect_pct:45.0},
+  G:{multiplicateur:1.95,va_sur_ca:22.0,emplois_par_mca:17.0,part_salaires:62.0,part_taxes:11.0,indirect_pct:38.0},
+  H:{multiplicateur:1.88,va_sur_ca:32.0,emplois_par_mca:16.2,part_salaires:64.0,part_taxes:12.0,indirect_pct:37.0},
+  I:{multiplicateur:2.05,va_sur_ca:45.0,emplois_par_mca:26.0,part_salaires:72.0,part_taxes:8.5, indirect_pct:40.0},
+  J:{multiplicateur:1.65,va_sur_ca:62.0,emplois_par_mca:9.5, part_salaires:68.0,part_taxes:10.0,indirect_pct:28.0},
+  K:{multiplicateur:1.42,va_sur_ca:82.0,emplois_par_mca:5.0, part_salaires:38.0,part_taxes:18.0,indirect_pct:22.0},
+  L:{multiplicateur:1.38,va_sur_ca:88.0,emplois_par_mca:4.5, part_salaires:18.0,part_taxes:14.0,indirect_pct:20.0},
+  M:{multiplicateur:1.72,va_sur_ca:55.0,emplois_par_mca:10.8,part_salaires:72.0,part_taxes:10.5,indirect_pct:33.0},
+  N:{multiplicateur:2.00,va_sur_ca:48.0,emplois_par_mca:22.0,part_salaires:75.0,part_taxes:9.0, indirect_pct:38.0},
+  O:{multiplicateur:1.80,va_sur_ca:95.0,emplois_par_mca:15.0,part_salaires:78.0,part_taxes:20.0,indirect_pct:30.0},
+  P:{multiplicateur:1.85,va_sur_ca:92.0,emplois_par_mca:19.0,part_salaires:80.0,part_taxes:12.0,indirect_pct:32.0},
+  Q:{multiplicateur:2.02,va_sur_ca:78.0,emplois_par_mca:20.0,part_salaires:76.0,part_taxes:11.0,indirect_pct:36.0},
+  R:{multiplicateur:1.95,va_sur_ca:50.0,emplois_par_mca:21.0,part_salaires:65.0,part_taxes:10.0,indirect_pct:37.0},
+  S:{multiplicateur:1.90,va_sur_ca:55.0,emplois_par_mca:23.0,part_salaires:68.0,part_taxes:9.5, indirect_pct:36.0}
+};
+
+// ─── UTILS ───────────────────────────────────────────────────────────────────
+function fmt(n) {
+  if (Math.abs(n)>=1e9) return (n/1e9).toFixed(1)+" Md€";
+  if (Math.abs(n)>=1e6) return (n/1e6).toFixed(1)+" M€";
+  if (Math.abs(n)>=1e3) return Math.round(n/1e3)+" k€";
+  return Math.round(n)+" €";
+}
+function fmtN(n) { return new Intl.NumberFormat('fr-FR').format(n); }
+function parseCA(s) { return parseInt(s.replace(/[\s\u00A0\u202F,]/g,''),10); }
+
+function benchTag(val, ref, higherBetter) {
+  const diff = ((val-ref)/ref)*100;
+  const sign = diff>=0?'+':'';
+  const cls  = (higherBetter ? diff>=0 : diff<=0) ? 'above' : 'below';
+  return `<span class="bench-tag ${cls}">${sign}${diff.toFixed(0)}%</span>`;
+}
+
+// ─── AUTOCOMPLETE ─────────────────────────────────────────────────────────────
+let acTimer = null;
+let acFocusIdx = -1;
+let selectedSiren = null;
+
+const searchInput = document.getElementById('searchInput');
+const acDropdown  = document.getElementById('acDropdown');
+
+searchInput.addEventListener('input', function() {
+  clearTimeout(acTimer);
+  const q = this.value.trim();
+  selectedSiren = null;
+  setSearchIcon('','');
+  document.getElementById('companyChip').classList.remove('show');
+
+  if (!q) { closeAC(); return; }
+
+  // Si ça ressemble à un SIREN (chiffres seulement)
+  const digits = q.replace(/\s/g,'');
+  if (/^\d+$/.test(digits)) {
+    if (digits.length === 9) {
+      setSearchIcon('spin','···');
+      acTimer = setTimeout(()=>lookupBySiren(digits), 500);
+    } else {
+      setSearchIcon('','');
+      closeAC();
+    }
+    return;
+  }
+
+  // Sinon recherche par nom
+  if (q.length >= 2) {
+    setSearchIcon('spin','···');
+    acTimer = setTimeout(()=>searchByName(q), 400);
+  }
+});
+
+searchInput.addEventListener('keydown', function(e) {
+  const items = acDropdown.querySelectorAll('.hf-ac-item');
+  if (e.key==='ArrowDown') { e.preventDefault(); moveFocus(1, items); }
+  if (e.key==='ArrowUp')   { e.preventDefault(); moveFocus(-1, items); }
+  if (e.key==='Enter' && acFocusIdx>=0) { e.preventDefault(); items[acFocusIdx]?.click(); }
+  if (e.key==='Escape') closeAC();
+});
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.hf-input-wrap')) closeAC();
+});
+
+function moveFocus(dir, items) {
+  items.forEach(i=>i.classList.remove('focused'));
+  acFocusIdx = Math.max(0, Math.min(items.length-1, acFocusIdx+dir));
+  items[acFocusIdx]?.classList.add('focused');
+}
+
+async function searchByName(q) {
+  try {
+    const r = await fetch(`https://recherche-entreprises.api.gouv.fr/search?q=${encodeURIComponent(q)}&page=1&per_page=6`);
+    const d = await r.json();
+    renderAC(d.results||[]);
+    setSearchIcon('','');
+  } catch { closeAC(); setSearchIcon('',''); }
+}
+
+async function lookupBySiren(siren) {
+  try {
+    const r = await fetch(`https://recherche-entreprises.api.gouv.fr/search?q=${siren}&page=1&per_page=1`);
+    const d = await r.json();
+    const res = d.results?.[0];
+    if (!res) { setSearchIcon('err','✗'); closeAC(); return; }
+    pickCompany(res.siren, res.nom_complet||siren, res.activite_principale||'');
+  } catch { setSearchIcon('err','—'); }
+}
+
+function renderAC(results) {
+  acFocusIdx = -1;
+  if (!results.length) {
+    acDropdown.innerHTML = `<div class="hf-ac-empty">Aucun résultat</div>`;
+    acDropdown.classList.add('open');
+    return;
+  }
+  acDropdown.innerHTML = results.map(r => `
+    <div class="hf-ac-item"
+      data-siren="${r.siren||''}"
+      data-nom="${r.nom_complet||''}"
+      data-naf="${r.activite_principale||''}"
+      onclick="pickFromAC(this)">
+      <div class="hf-ac-name">${r.nom_complet||r.siren}</div>
+      <div class="hf-ac-meta">
+        <span>${r.siren||''}</span>
+        ${r.activite_principale?`<span>${r.activite_principale}</span>`:''}
+        ${r.siege?.libelle_commune?`<span>${r.siege.libelle_commune}</span>`:''}
+      </div>
+    </div>
+  `).join('');
+  acDropdown.classList.add('open');
+}
+
+function pickFromAC(el) {
+  pickCompany(el.dataset.siren, el.dataset.nom, el.dataset.naf);
+}
+
+function pickCompany(siren, nom, naf) {
+  selectedSiren = siren;
+  searchInput.value = nom || siren;
+  closeAC();
+  setSearchIcon('ok','✓');
+  document.getElementById('chipName').textContent = nom;
+  document.getElementById('chipNaf').textContent  = naf;
+  document.getElementById('companyChip').classList.add('show');
+}
+
+function setSearchIcon(cls, txt) {
+  const el = document.getElementById('searchIcon');
+  el.className = `hf-input-icon ${cls}`;
+  el.textContent = txt;
+}
+
+function closeAC() {
+  acDropdown.classList.remove('open');
+  acFocusIdx = -1;
+}
+
+// Format CA
+document.getElementById('caInput').addEventListener('blur', function() {
+  const n = parseCA(this.value);
+  if (!isNaN(n) && n>0) this.value = new Intl.NumberFormat('fr-FR').format(n);
+});
+
+// ─── CALCULATE ────────────────────────────────────────────────────────────────
+async function calculate() {
+  const siren = selectedSiren || searchInput.value.replace(/\D/g,'');
+  const ca    = parseCA(document.getElementById('caInput').value);
+  const email = document.getElementById('emailInput').value.trim();
+  const btn   = document.getElementById('ctaBtn');
+  const alert = document.getElementById('heroAlert');
+
+  alert.classList.remove('show');
+
+  if (!/^\d{9}$/.test(siren))  { showAlert("Sélectionnez une entreprise ou saisissez un SIREN valide (9 chiffres)."); return; }
+  if (isNaN(ca)||ca<=0)         { showAlert("Renseignez un chiffre d'affaires valide."); return; }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showAlert("Adresse email invalide."); return; }
+
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  try {
+    const res  = await fetch(API_URL, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ siren, ca })
+    });
+    const data = await res.json();
+    if (!res.ok) { showAlert(data.error||`Erreur ${res.status}`); return; }
+    render(data, email);
+  } catch {
+    showAlert("Impossible de joindre l'API. Vérifiez votre connexion.");
+  } finally {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+}
+
+function showAlert(msg) {
+  document.getElementById('alertText').textContent = msg;
+  document.getElementById('heroAlert').classList.add('show');
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+let radarInstance = null;
+
+function render(data, email) {
+  const { entreprise, secteur, chiffre_affaires: ca, impact, meta } = data;
+  const { direct:d, indirect:i, induit:u, total:t } = impact;
+  const naf = secteur.section_naf;
+
+  // Email banner
+  if (email) {
+    document.getElementById('emailBannerText').textContent = `Rapport envoyé à ${email}`;
+    document.getElementById('emailBanner').classList.add('show');
+  } else {
+    document.getElementById('emailBanner').classList.remove('show');
+  }
+
+  // Header
+  document.getElementById('resCompany').textContent = entreprise.nom || secteur.libelle;
+  document.getElementById('resMeta').textContent =
+    `Section ${naf} — ${secteur.libelle} · CA déclaré : ${fmt(ca)}`;
+
+  // Métriques calculées
+  const emploisMca   = t.emplois / (ca/1_000_000);
+  const vaSurCa      = (t.valeur_ajoutee / ca)*100;
+  const partSalaires = d.valeur_ajoutee>0 ? (d.salaires/d.valeur_ajoutee)*100 : 0;
+  const partTaxes    = d.valeur_ajoutee>0 ? (d.taxes/d.valeur_ajoutee)*100 : 0;
+  const indirectPct  = t.valeur_ajoutee>0 ? (i.valeur_ajoutee/t.valeur_ajoutee)*100 : 0;
+  const multi        = t.multiplicateur_emploi;
+  const bs           = BENCH_SEC[naf] || BENCH_NAT;
+
+  // KPIs
+  set('kpiEmplois', fmtN(t.emplois));
+  set('kpiEmploisSub', `${emploisMca.toFixed(1)} emplois / M€ CA`);
+  document.getElementById('kpiBenchEmplois').innerHTML =
+    `<span class="bench-tag label">Secteur</span> ${benchTag(emploisMca, bs.emplois_par_mca, true)}
+     <span class="bench-sep">·</span>
+     <span class="bench-tag label">National</span> ${benchTag(emploisMca, BENCH_NAT.emplois_par_mca, true)}`;
+
+  set('kpiVa', fmt(t.valeur_ajoutee));
+  set('kpiVaSub', `${vaSurCa.toFixed(1)}% du CA`);
+  document.getElementById('kpiBenchVa').innerHTML =
+    `<span class="bench-tag label">Secteur</span> ${benchTag(vaSurCa, bs.va_sur_ca, true)}
+     <span class="bench-sep">·</span>
+     <span class="bench-tag label">National</span> ${benchTag(vaSurCa, BENCH_NAT.va_sur_ca, true)}`;
+
+  set('kpiTaxes', fmt(t.taxes));
+  set('kpiTaxesSub', `${((t.taxes/ca)*100).toFixed(1)}% du CA`);
+  document.getElementById('kpiBenchTaxes').innerHTML =
+    `<span class="bench-tag label">Secteur</span> ${benchTag(partTaxes, bs.part_taxes, true)}
+     <span class="bench-sep">·</span>
+     <span class="bench-tag label">National</span> ${benchTag(partTaxes, BENCH_NAT.part_taxes, true)}`;
+
+  // Multiplier
+  document.getElementById('multNum').innerHTML = `${multi}<span class="mult-x">×</span>`;
+  set('multExtra', (multi-1).toFixed(2));
+  document.getElementById('multBench').innerHTML = `
+    <div class="mult-bench-row"><span>Moy. secteur</span><span>${bs.multiplicateur.toFixed(2)}×</span></div>
+    <div class="mult-bench-row"><span>Moy. nationale</span><span>${BENCH_NAT.multiplicateur.toFixed(2)}×</span></div>
+    <div class="mult-bench-row">
+      <span>Écart secteur</span>
+      <span style="color:${multi>=bs.multiplicateur?'#93c5fd':'#fca5a5'}">
+        ${multi>=bs.multiplicateur?'+':''}${((multi-bs.multiplicateur)/bs.multiplicateur*100).toFixed(0)}%
+      </span>
+    </div>
+  `;
+
+  // Table
+  for (const [k,l] of [['d',d],['i',i],['u',u],['t',t]]) {
+    set(`${k}-va`,  fmt(l.valeur_ajoutee));
+    set(`${k}-sal`, fmt(l.salaires));
+    set(`${k}-emp`, fmtN(l.emplois));
+  }
+
+  // Radar
+  renderRadar(naf, multi, vaSurCa, emploisMca, partSalaires, partTaxes, indirectPct, bs);
+  set('legendSector', naf);
+
+  // Sectors
+  const sorted = Object.entries(i.production_par_section||{}).sort((a,b)=>b[1]-a[1]);
+  document.getElementById('sectorsGrid').innerHTML = sorted.map(([s,v]) => `
+    <div class="sector-item">
+      <div class="sector-left">
+        <span class="sector-pill">${s}</span>${NAF_LABELS[s]||s}
+      </div>
+      <span class="sector-val">${fmt(v)}</span>
+    </div>
+  `).join('');
+
+  // Footer
+  set('resFoot', `Sources : ${meta.sources.join(' · ')} · ${new Date(meta.calcule_le).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})}`);
+
+  // Show & scroll
+  const el = document.getElementById('results');
+  el.classList.add('show');
+  setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}), 80);
+}
+
+function set(id, val) { document.getElementById(id).textContent = val; }
+
+// ─── RADAR ────────────────────────────────────────────────────────────────────
+function norm(val, ref) { return Math.min((val/ref)*50, 100); }
+
+function renderRadar(naf, multi, vaSurCa, emploisMca, partSalaires, partTaxes, indirectPct, bs) {
+  const labels = ['Multiplicateur','VA / CA','Emplois / M€','Part salaires','Part taxes','Impact indirect'];
+  const nat    = [50,50,50,50,50,50];
+  const sec    = [
+    norm(bs.multiplicateur,  BENCH_NAT.multiplicateur),
+    norm(bs.va_sur_ca,       BENCH_NAT.va_sur_ca),
+    norm(bs.emplois_par_mca, BENCH_NAT.emplois_par_mca),
+    norm(bs.part_salaires,   BENCH_NAT.part_salaires),
+    norm(bs.part_taxes,      BENCH_NAT.part_taxes),
+    norm(bs.indirect_pct,    BENCH_NAT.indirect_pct),
+  ];
+  const company = [
+    norm(multi,        BENCH_NAT.multiplicateur),
+    norm(vaSurCa,      BENCH_NAT.va_sur_ca),
+    norm(emploisMca,   BENCH_NAT.emplois_par_mca),
+    norm(partSalaires, BENCH_NAT.part_salaires),
+    norm(partTaxes,    BENCH_NAT.part_taxes),
+    norm(indirectPct,  BENCH_NAT.indirect_pct),
+  ];
+
+  if (radarInstance) radarInstance.destroy();
+
+  radarInstance = new Chart(document.getElementById('radarChart').getContext('2d'), {
+    type: 'radar',
+    data: {
+      labels,
+      datasets: [
+        { label:'Entreprise', data:company,
+          backgroundColor:'rgba(0,35,149,.1)', borderColor:'rgba(0,35,149,.85)',
+          borderWidth:2, pointBackgroundColor:'rgba(0,35,149,1)', pointRadius:3, pointHoverRadius:5 },
+        { label:'Secteur', data:sec,
+          backgroundColor:'rgba(237,41,57,.06)', borderColor:'rgba(237,41,57,.6)',
+          borderWidth:1.5, borderDash:[4,3], pointBackgroundColor:'rgba(237,41,57,.8)',
+          pointRadius:2, pointHoverRadius:4 },
+        { label:'National', data:nat,
+          backgroundColor:'rgba(100,116,139,.04)', borderColor:'rgba(100,116,139,.35)',
+          borderWidth:1, borderDash:[2,4], pointRadius:0 }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:true,
+      animation:{ duration:600, easing:'easeOutQuart' },
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{
+          label:(ctx)=>{
+            const diff = ctx.raw-50;
+            const sign = diff>=0?'+':'';
+            return ` ${ctx.dataset.label}: ${sign}${(diff/50*100).toFixed(0)}% vs national`;
+          }
+        }}
+      },
+      scales:{r:{
+        min:0, max:100,
+        ticks:{display:false, stepSize:25},
+        grid:{color:'rgba(221,227,238,.8)', circular:true},
+        angleLines:{color:'rgba(221,227,238,.6)'},
+        pointLabels:{font:{family:'Geist',size:11,weight:'500'}, color:'#64748b', padding:8}
+      }}
+    }
+  });
+}
+</script>
+</body>
+</html>

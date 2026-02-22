@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Méthodologie — IN France</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #0d1b2a;
+    --muted: #f3f5f9;
+    --muted-fg: #64748b;
+    --border: #dde3ee;
+    --radius: 6px;
+    --fr-blue: #002395;
+    --fr-red:  #ED2939;
+    --green: #16a34a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Geist', -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── HEADER ─────────────────────────────────────────── */
+  header {
+    border-bottom: 1px solid var(--border);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 24px;
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    text-decoration: none;
+  }
+
+  .logo-in     { font-size: 16px; font-weight: 700; letter-spacing: -0.4px; color: var(--fr-blue); }
+  .logo-france { font-size: 16px; font-weight: 700; letter-spacing: -0.4px; color: var(--fr-red); }
+
+  .header-sep { width: 1px; height: 18px; background: var(--border); }
+
+  .nav { display: flex; gap: 2px; }
+  .nav-link {
+    padding: 4px 10px;
+    font-size: 13px;
+    color: var(--muted-fg);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .12s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  .nav-link:hover, .nav-link.active { background: var(--muted); color: var(--fg); font-weight: 500; }
+
+  .header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 9px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 11px;
+    color: var(--muted-fg);
+    font-family: 'Geist Mono', monospace;
+  }
+
+  .chip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+
+  .btn-demo {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 14px;
+    background: var(--fr-blue);
+    color: white;
+    border-radius: var(--radius);
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background .15s, box-shadow .15s;
+  }
+
+  .btn-demo:hover { background: #001c7a; box-shadow: 0 2px 12px rgba(0,35,149,.25); }
+
+  /* ─── PAGE HERO ───────────────────────────────────────── */
+  .page-hero {
+    border-bottom: 1px solid var(--border);
+    padding: 56px 32px 52px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 52px 52px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .tricolor-top { display: flex; height: 3px; }
+  .tricolor-top div:nth-child(1) { flex:1; background: var(--fr-blue); }
+  .tricolor-top div:nth-child(2) { flex:1; background: #e8e8e8; }
+  .tricolor-top div:nth-child(3) { flex:1; background: var(--fr-red); }
+
+  .page-hero-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: 14px;
+  }
+
+  .page-eyebrow-bar { width: 16px; height: 1px; background: var(--border); }
+
+  .page-hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+
+  .page-hero h1 span {
+    background: linear-gradient(120deg, var(--fr-blue) 0%, var(--fr-red) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .page-hero-sub {
+    font-size: 16px;
+    color: var(--muted-fg);
+    font-weight: 300;
+    max-width: 560px;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .page-hero-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--muted-fg);
+    font-family: 'Geist Mono', monospace;
+    background: var(--muted);
+  }
+
+  /* ─── LAYOUT ──────────────────────────────────────────── */
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 52px 32px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  /* ─── SECTION ─────────────────────────────────────────── */
+  .section {}
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .section-num {
+    display: grid;
+    place-items: center;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: white;
+  }
+
+  .section-num.blue { background: var(--fr-blue); }
+  .section-num.mid  { background: #7088b8; }
+  .section-num.red  { background: var(--fr-red); }
+  .section-num.grey { background: #475569; }
+
+  .section-title-wrap { display: flex; flex-direction: column; gap: 1px; }
+  .section-eyebrow    { font-size: 10px; font-weight: 500; color: var(--muted-fg); text-transform: uppercase; letter-spacing: 0.08em; }
+  .section-title      { font-size: 20px; font-weight: 700; letter-spacing: -0.4px; line-height: 1.2; }
+
+  .section-body {
+    padding-left: 36px;
+  }
+
+  .prose {
+    font-size: 14px;
+    color: var(--fg);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+
+  .prose strong { font-weight: 600; }
+
+  /* ─── FORMULA BOX ─────────────────────────────────────── */
+  .formula-box {
+    background: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+
+  .formula-box-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted-fg);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  .formula {
+    font-family: 'Geist Mono', monospace;
+    font-size: 13px;
+    color: var(--fg);
+    line-height: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .formula-comment {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--muted-fg);
+  }
+
+  /* ─── DATA SOURCE CARDS ───────────────────────────────── */
+  .source-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .source-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    background: var(--bg);
+  }
+
+  .source-card-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: var(--fg);
+  }
+
+  .source-card-desc {
+    font-size: 12px;
+    color: var(--muted-fg);
+    line-height: 1.5;
+  }
+
+  .source-card-badge {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 10px;
+    font-family: 'Geist Mono', monospace;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  .badge-blue  { background: #eef1ff; color: var(--fr-blue); }
+  .badge-red   { background: #fff0f1; color: var(--fr-red); }
+  .badge-grey  { background: var(--muted); color: var(--muted-fg); border: 1px solid var(--border); }
+
+  /* ─── SEPARATOR ───────────────────────────────────────── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── METRICS TABLE ───────────────────────────────────── */
+  .metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 16px;
+  }
+
+  .metrics-table thead th {
+    text-align: left;
+    padding: 0 12px 9px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted-fg);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .metrics-table thead th:first-child { padding-left: 0; }
+
+  .metrics-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  .metrics-table tbody td:first-child { padding-left: 0; font-weight: 500; white-space: nowrap; }
+  .metrics-table tbody tr:last-child td { border-bottom: none; }
+
+  .mono { font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--fr-blue); }
+
+  /* ─── LAYER FLOW ──────────────────────────────────────── */
+  .layer-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 16px 0;
+  }
+
+  .layer-step {
+    display: flex;
+    gap: 16px;
+    position: relative;
+  }
+
+  .layer-step::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 28px;
+    bottom: -4px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .layer-step:last-child::before { display: none; }
+
+  .layer-step-icon {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    position: relative;
+    z-index: 1;
+  }
+
+  .layer-step-body {
+    padding-bottom: 24px;
+    flex: 1;
+  }
+
+  .layer-step-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 2px;
+  }
+
+  .layer-step-desc {
+    font-size: 13px;
+    color: var(--muted-fg);
+    line-height: 1.6;
+  }
+
+  /* ─── ASSUMPTIONS BOX ─────────────────────────────────── */
+  .assumptions {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 3px solid #d97706;
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #92400e;
+    line-height: 1.6;
+  }
+
+  .assumptions strong { font-weight: 600; color: #78350f; }
+
+  /* ─── CTA BOTTOM ──────────────────────────────────────── */
+  .page-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 28px 32px;
+    background: linear-gradient(135deg, #001c7a 0%, var(--fr-blue) 70%);
+    border-radius: 10px;
+    color: white;
+    flex-wrap: wrap;
+  }
+
+  .page-cta-left {}
+  .page-cta-title { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 4px; }
+  .page-cta-sub   { font-size: 13px; color: rgba(255,255,255,.55); }
+
+  .page-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 40px;
+    padding: 0 20px;
+    background: var(--fr-red);
+    color: white;
+    border-radius: var(--radius);
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: background .15s, box-shadow .15s;
+  }
+
+  .page-cta-btn:hover { background: #d42233; box-shadow: 0 4px 20px rgba(237,41,57,.4); }
+
+  /* ─── RESPONSIVE ──────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .content { padding: 36px 16px 80px; gap: 40px; }
+    .page-hero { padding: 40px 16px 36px; }
+    header { padding: 0 16px; }
+    .section-body { padding-left: 0; }
+    .page-cta { flex-direction: column; gap: 16px; padding: 24px 20px; }
+    .source-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="index.html">
+    <span class="logo-in">IN</span>
+    <span class="logo-france">France</span>
+  </a>
+  <div class="header-sep"></div>
+  <nav class="nav">
+    <a class="nav-link" href="index.html">Simulateur</a>
+    <a class="nav-link active" href="methodologie.html">Méthodologie</a>
+    <a class="nav-link" href="https://www.in-france.fr/a-propos" target="_blank">À propos</a>
+  </nav>
+  <div class="header-right">
+    <div class="chip"><div class="chip-dot"></div>API live</div>
+    <a class="btn-demo" href="https://www.in-france.fr/demo" target="_blank">
+      Prendre rendez-vous →
+    </a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="tricolor-top"><div></div><div></div><div></div></div>
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">
+      <div class="page-eyebrow-bar"></div>
+      Documentation scientifique
+    </div>
+    <h1>Notre <span>méthodologie</span></h1>
+    <p class="page-hero-sub">
+      Le simulateur IN France s'appuie sur trois couches de calcul économique
+      complémentaires, issues de sources statistiques officielles françaises et internationales.
+    </p>
+    <div class="page-hero-tags">
+      <span class="tag">BdF FIBEN 2024</span>
+      <span class="tag">OCDE ICIO 2023</span>
+      <span class="tag">Eurostat HBS 2020</span>
+      <span class="tag">INSEE SIRENE</span>
+      <span class="tag">Modèle Leontief</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- Vue d'ensemble -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-num grey">∑</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Vue d'ensemble</div>
+        <div class="section-title">Un modèle à trois couches</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="prose">
+        L'impact territorial d'une entreprise ne se limite pas à ses emplois directs.
+        Chaque euro de chiffre d'affaires déclenche une <strong>chaîne de valeur invisible</strong> :
+        achats auprès de fournisseurs, salaires versés aux ménages, consommation locale.
+        Notre modèle décompose cet impact en trois niveaux imbriqués.
+      </p>
+
+      <div class="layer-flow">
+        <div class="layer-step">
+          <div class="layer-step-icon" style="background:var(--fr-blue)">1</div>
+          <div class="layer-step-body">
+            <div class="layer-step-title">
+              Effets directs
+              <span style="font-size:11px;font-weight:400;color:var(--muted-fg);font-family:'Geist Mono',monospace">BdF FIBEN</span>
+            </div>
+            <div class="layer-step-desc">
+              Valeur ajoutée, masse salariale, contributions fiscales et emplois créés
+              directement par l'entreprise, calculés via les ratios sectoriels de la Banque de France.
+            </div>
+          </div>
+        </div>
+        <div class="layer-step">
+          <div class="layer-step-icon" style="background:#7088b8">2</div>
+          <div class="layer-step-body">
+            <div class="layer-step-title">
+              Effets indirects
+              <span style="font-size:11px;font-weight:400;color:var(--muted-fg);font-family:'Geist Mono',monospace">OCDE ICIO · Leontief</span>
+            </div>
+            <div class="layer-step-desc">
+              Production induite chez les fournisseurs et sous-traitants de chaque secteur,
+              modélisée par la matrice Leontief des échanges interindustriels français.
+            </div>
+          </div>
+        </div>
+        <div class="layer-step">
+          <div class="layer-step-icon" style="background:var(--fr-red)">3</div>
+          <div class="layer-step-body">
+            <div class="layer-step-title">
+              Effets induits
+              <span style="font-size:11px;font-weight:400;color:var(--muted-fg);font-family:'Geist Mono',monospace">Eurostat HBS</span>
+            </div>
+            <div class="layer-step-desc">
+              Impact de la consommation des ménages bénéficiant des salaires directs et indirects,
+              ventilé par section NAF via la structure de consommation des familles françaises.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="source-grid">
+        <div class="source-card">
+          <div class="source-card-name">Banque de France — FIBEN</div>
+          <div class="source-card-desc">Ratios financiers sectoriels issus de 250 000+ bilans d'entreprises françaises</div>
+          <span class="source-card-badge badge-blue">17 sections NAF · 2024</span>
+        </div>
+        <div class="source-card">
+          <div class="source-card-name">OCDE — ICIO</div>
+          <div class="source-card-desc">Tableaux des échanges interindustriels mondiaux, extrait France</div>
+          <span class="source-card-badge badge-blue">289 coefficients · 2023</span>
+        </div>
+        <div class="source-card">
+          <div class="source-card-name">Eurostat — HBS</div>
+          <div class="source-card-desc">Enquête sur le budget des ménages, structure de consommation par COICOP</div>
+          <span class="source-card-badge badge-red">15 catégories · 2020</span>
+        </div>
+        <div class="source-card">
+          <div class="source-card-name">INSEE — ESANE</div>
+          <div class="source-card-desc">Productivité apparente du travail par section, base de calcul des emplois</div>
+          <span class="source-card-badge badge-grey">17 sections · 2022</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Couche 1 -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-num blue">1</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Couche 1 — Effets directs</div>
+        <div class="section-title">Ratios sectoriels BdF FIBEN</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="prose">
+        À partir du chiffre d'affaires déclaré et de la section NAF de l'entreprise,
+        nous appliquons les <strong>ratios financiers sectoriels</strong> de la Banque de France
+        pour estimer les agrégats économiques directs.
+        Ces ratios sont calculés annuellement à partir de plus de 250 000 bilans d'entreprises françaises.
+      </p>
+
+      <div class="formula-box">
+        <div class="formula-box-title">Formules — Effets directs</div>
+        <div class="formula">
+          <span>VA_directe        = CA × taux_VA[section]</span>
+          <span>Salaires_directs  = VA_directe × part_personnel[section]</span>
+          <span>Taxes_directes    = VA_directe × part_etat[section]</span>
+          <span>Emplois_directs   = VA_directe / productivité[section]</span>
+        </div>
+        <div class="formula-comment" style="margin-top:10px">
+          — taux_VA, part_personnel, part_etat : ratios BdF FIBEN 2024<br>
+          — productivité : VA par emploi, source INSEE ESANE 2022
+        </div>
+      </div>
+
+      <table class="metrics-table">
+        <thead>
+          <tr>
+            <th>Indicateur</th>
+            <th>Source</th>
+            <th>Exemple (section F — Construction)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Taux de valeur ajoutée</td>
+            <td><span class="mono">BdF FIBEN</span></td>
+            <td>38,5% du CA</td>
+          </tr>
+          <tr>
+            <td>Part personnel / VA</td>
+            <td><span class="mono">BdF FIBEN</span></td>
+            <td>68% de la VA</td>
+          </tr>
+          <tr>
+            <td>Part État / VA</td>
+            <td><span class="mono">BdF FIBEN</span></td>
+            <td>9,5% de la VA</td>
+          </tr>
+          <tr>
+            <td>Productivité du travail</td>
+            <td><span class="mono">INSEE ESANE</span></td>
+            <td>52 k€ VA / emploi / an</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Couche 2 -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-num mid">2</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Couche 2 — Effets indirects</div>
+        <div class="section-title">Matrice de Leontief — OCDE ICIO</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="prose">
+        Le modèle entrées-sorties de <strong>Wassily Leontief</strong> (prix Nobel 1973)
+        permet de calculer, pour chaque euro de production dans un secteur,
+        les productions induites dans tous les autres secteurs de l'économie.
+        Nous utilisons la matrice Leontief calculée à partir des
+        <strong>tableaux ICIO (Inter-Country Input-Output) de l'OCDE</strong>, extrait France.
+      </p>
+
+      <div class="formula-box">
+        <div class="formula-box-title">Principe — Matrice inverse de Leontief</div>
+        <div class="formula">
+          <span>L = (I - A)⁻¹</span>
+          <span></span>
+          <span class="formula-comment">où :</span>
+          <span class="formula-comment">  A     = matrice des coefficients techniques (achats intermédiaires / production)</span>
+          <span class="formula-comment">  I     = matrice identité</span>
+          <span class="formula-comment">  L     = matrice des multiplicateurs (effets totaux directs + indirects)</span>
+          <span></span>
+          <span>Production_induite[j] = L[j, naf_section] × CA</span>
+          <span class="formula-comment">  — calculé pour chaque section j ≠ naf_section</span>
+          <span class="formula-comment">  — l'effet diagonal L[naf,naf] - 1 est retranché pour éviter le double-comptage</span>
+        </div>
+      </div>
+
+      <p class="prose">
+        La matrice <code style="font-family:'Geist Mono',monospace;background:var(--muted);padding:1px 5px;border-radius:3px;font-size:12px">leontief_france_naf</code> stockée dans notre base Supabase
+        contient <strong>289 coefficients</strong> (17 × 17 sections NAF).
+        Pour chaque section activée, nous calculons ensuite la VA, les salaires,
+        les taxes et les emplois induits via les mêmes ratios BdF.
+      </p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Couche 3 -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-num red">3</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Couche 3 — Effets induits</div>
+        <div class="section-title">Propension à consommer — Eurostat HBS</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="prose">
+        Les salaires versés (couches 1 + 2) alimentent la <strong>consommation des ménages</strong>,
+        qui à son tour génère de l'activité économique. Nous modélisons ce circuit via
+        l'<strong>enquête HBS (Household Budget Survey)</strong> d'Eurostat, qui mesure
+        la structure de consommation des familles françaises par catégorie COICOP.
+      </p>
+
+      <div class="formula-box">
+        <div class="formula-box-title">Formules — Effets induits</div>
+        <div class="formula">
+          <span>Revenus_ménages   = Salaires_directs + Salaires_indirects</span>
+          <span>Consommation[s]   = Revenus_ménages × PMC[s]</span>
+          <span>VA_induite[s]     = Consommation[s] × taux_VA[s]</span>
+          <span>Emplois_induits   = Σ VA_induite[s] / productivité[s]</span>
+        </div>
+        <div class="formula-comment" style="margin-top:10px">
+          — PMC[s] : Propensité Marginale à Consommer par section NAF<br>
+          — dérivée du mapping COICOP → NAF via Eurostat HBS France 2020<br>
+          — 12 catégories COICOP mappées sur 15 sections NAF
+        </div>
+      </div>
+
+      <p class="prose">
+        Le mapping COICOP → NAF est réalisé avec une pondération économique.
+        Par exemple, <em>CP01 — Alimentation</em> est distribué entre
+        A (Agriculture, 25%), C (Industrie manufact., 40%) et G (Commerce, 35%),
+        reflétant la chaîne de production alimentaire française.
+      </p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Multiplicateur -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-num grey">×</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Indicateur synthétique</div>
+        <div class="section-title">Le multiplicateur d'emploi</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="prose">
+        Le <strong>multiplicateur d'emploi</strong> mesure combien d'emplois totaux
+        sont générés dans l'économie pour chaque emploi direct créé par l'entreprise.
+        Un multiplicateur de 2,25× dans la construction signifie que pour 100 emplois
+        directs, 125 emplois supplémentaires sont créés dans l'économie française.
+      </p>
+
+      <div class="formula-box">
+        <div class="formula-box-title">Calcul du multiplicateur</div>
+        <div class="formula">
+          <span>Multiplicateur = Emplois_totaux / Emplois_directs</span>
+          <span>             = (E_direct + E_indirect + E_induit) / E_direct</span>
+        </div>
+      </div>
+
+      <p class="prose">
+        Les multiplicateurs varient significativement selon les secteurs :
+        la construction (2,25×) et l'agriculture (2,15×) ont les multiplicateurs
+        les plus élevés car elles génèrent beaucoup d'achats intermédiaires locaux,
+        tandis que la finance (1,42×) et l'immobilier (1,38×) ont des effets plus faibles
+        car leur valeur ajoutée est davantage captée par le capital.
+      </p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Limites -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-num grey">!</div>
+      <div class="section-title-wrap">
+        <div class="section-eyebrow">Limites & précautions</div>
+        <div class="section-title">Ce que la simulation ne mesure pas</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="assumptions">
+        <strong>La simulation repose sur des moyennes sectorielles nationales.</strong>
+        Les résultats sont des estimations statistiques et peuvent différer de la réalité
+        d'une entreprise spécifique selon sa structure de coûts, ses fournisseurs,
+        sa localisation ou son modèle économique particulier.
+      </div>
+
+      <p class="prose" style="margin-top:16px">Les principaux facteurs non pris en compte :</p>
+
+      <table class="metrics-table">
+        <thead>
+          <tr><th>Facteur</th><th>Impact possible</th><th>Recommandation</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Structure fournisseurs réelle</td>
+            <td>±20 à 40% sur les effets indirects</td>
+            <td>Analyse sur mesure recommandée</td>
+          </tr>
+          <tr>
+            <td>Localisation géographique</td>
+            <td>Impact territorial régional vs. national</td>
+            <td>Rapport territorial disponible</td>
+          </tr>
+          <tr>
+            <td>Exportations</td>
+            <td>Fuite de valeur hors France sous-estimée</td>
+            <td>Correction possible sur demande</td>
+          </tr>
+          <tr>
+            <td>Taux de recours à l'intérim</td>
+            <td>Emplois indirects surestimés</td>
+            <td>Variable d'ajustement disponible</td>
+          </tr>
+          <tr>
+            <td>Investissements immatériels</td>
+            <td>R&D, brevets non captés par le modèle</td>
+            <td>Extension en cours de développement</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CTA bottom -->
+  <div class="page-cta">
+    <div class="page-cta-left">
+      <div class="page-cta-title">Besoin d'une analyse sur mesure ?</div>
+      <div class="page-cta-sub">
+        Nos économistes appliquent la méthodologie à la structure réelle de votre entreprise.
+      </div>
+    </div>
+    <a class="page-cta-btn" href="https://www.in-france.fr/demo" target="_blank">
+      Prendre rendez-vous →
+    </a>
+  </div>
+
+</div><!-- /content -->
+
+</body>
+</html>
