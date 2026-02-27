@@ -489,7 +489,7 @@ Deno.serve(async (req: Request) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "IN France <onboarding@resend.dev>", // TODO: remettre contact@in-france.fr après vérification domaine
+          from: "IN France <contact@in-france.fr>",
           to:   [emailSaisi],
           subject: `Votre simulation d'impact territorial — ${nomEntreprise}`,
           html: emailHtml,
