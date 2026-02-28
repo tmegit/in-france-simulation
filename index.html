@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- ─── SEO Primaire ──────────────────────────────────────────────────── -->
-<title>Simulateur d'impact territorial | IN France — Mesurez l'impact économique de votre entreprise</title>
+<title>Simulateur d'impact territorial | IN France · Mesurez l'impact économique de votre entreprise</title>
 <meta name="description" content="Calculez en 30 secondes les emplois, la valeur ajoutée et les contributions fiscales générées par votre entreprise dans l'économie française. Simulation gratuite basée sur les données BdF, OCDE et Eurostat.">
 <meta name="keywords" content="impact territorial entreprise, simulateur impact économique, emplois induits France, valeur ajoutée entreprise, multiplicateur emploi, impact fiscal entreprise, analyse territoriale, RSE impact local">
 <meta name="author" content="IN France">
@@ -15,7 +15,7 @@
 <!-- ─── Open Graph (LinkedIn, Facebook, WhatsApp) ─────────────────────── -->
 <meta property="og:type"        content="website">
 <meta property="og:url"         content="https://simulateur.in-france.fr/">
-<meta property="og:title"       content="Simulateur d'impact territorial — IN France">
+<meta property="og:title"       content="Simulateur d'impact territorial | IN France">
 <meta property="og:description" content="Votre entreprise crée plus de valeur que vous ne pensez. Calculez emplois, valeur ajoutée et contributions fiscales en 30 secondes. Gratuit.">
 <meta property="og:image"       content="https://simulateur.in-france.fr/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -25,8 +25,8 @@
 
 <!-- ─── Twitter Card ─────────────────────────────────────────────────── -->
 <meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:title"       content="Simulateur d'impact territorial — IN France">
-<meta name="twitter:description" content="Calculez l'impact économique réel de votre entreprise sur la France. Emplois, VA, taxes — en 30 secondes, gratuitement.">
+<meta name="twitter:title"       content="Simulateur d'impact territorial | IN France">
+<meta name="twitter:description" content="Calculez l'impact économique réel de votre entreprise sur la France. Emplois, VA, taxes en 30 secondes, gratuitement.">
 <meta name="twitter:image"       content="https://simulateur.in-france.fr/og-image.png">
 
 <!-- ─── Schema.org WebApplication ────────────────────────────────────── -->
@@ -140,6 +140,73 @@
     transition: all .12s;
   }
   .nav-link:hover, .nav-link.active { background: var(--muted); color: var(--fg); font-weight: 500; }
+
+  /* Dropdown */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown-toggle {
+    padding: 4px 10px;
+    font-size: 13px;
+    color: var(--muted-fg);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .12s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    font-family: 'Geist', sans-serif;
+  }
+  .nav-dropdown-toggle:hover,
+  .nav-dropdown.open .nav-dropdown-toggle { background: var(--muted); color: var(--fg); font-weight: 500; }
+  .nav-dropdown-toggle svg { transition: transform .2s; }
+  .nav-dropdown.open .nav-dropdown-toggle svg { transform: rotate(180deg); }
+  .nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.12);
+    z-index: 200;
+    width: 540px;
+    padding: 16px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .nav-dropdown.open .nav-dropdown-menu { display: block; }
+  .nav-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .nav-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--fg);
+    font-size: 13px;
+    transition: background .1s;
+  }
+  .nav-dropdown-item:hover { background: var(--muted); }
+  .nav-dropdown-item-code {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--fr-blue);
+    background: var(--muted);
+    border: 1px solid var(--border);
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .nav-dropdown-backdrop { display: none; position: fixed; inset: 0; z-index: 150; }
+  .nav-dropdown.open .nav-dropdown-backdrop { display: block; }
 
   .header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
 
@@ -298,7 +365,7 @@
     color: var(--fr-blue);
   }
 
-  /* Colonne droite — formulaire */
+  /* Colonne droite : formulaire */
   .hero-form-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -1040,6 +1107,8 @@
     header { padding: 0 16px; }
     .trust-bar { padding: 12px 16px; gap: 16px; }
     .results-section { padding: 28px 16px 80px; }
+    .nav-dropdown-menu { width: calc(100vw - 32px); left: auto; right: -60px; transform: none; }
+    .nav-dropdown-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -1054,6 +1123,36 @@
   <div class="header-sep"></div>
   <nav class="nav">
     <div class="nav-link active">Simulateur</div>
+    <div class="nav-dropdown" id="secDropdown">
+      <div class="nav-dropdown-backdrop" onclick="document.getElementById('secDropdown').classList.remove('open')"></div>
+      <button class="nav-dropdown-toggle" onclick="this.parentElement.classList.toggle('open')">
+        Secteurs
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-grid">
+          <a class="nav-dropdown-item" href="/secteur/agriculture"><span class="nav-dropdown-item-code">A</span>Agriculture</a>
+          <a class="nav-dropdown-item" href="/secteur/industries-extractives"><span class="nav-dropdown-item-code">B</span>Ind. extractives</a>
+          <a class="nav-dropdown-item" href="/secteur/industrie-manufacturiere"><span class="nav-dropdown-item-code">C</span>Industrie manufacturière</a>
+          <a class="nav-dropdown-item" href="/secteur/energie"><span class="nav-dropdown-item-code">D</span>Énergie</a>
+          <a class="nav-dropdown-item" href="/secteur/eau-dechets"><span class="nav-dropdown-item-code">E</span>Eau et déchets</a>
+          <a class="nav-dropdown-item" href="/secteur/construction"><span class="nav-dropdown-item-code">F</span>Construction</a>
+          <a class="nav-dropdown-item" href="/secteur/commerce"><span class="nav-dropdown-item-code">G</span>Commerce</a>
+          <a class="nav-dropdown-item" href="/secteur/transports"><span class="nav-dropdown-item-code">H</span>Transports</a>
+          <a class="nav-dropdown-item" href="/secteur/hebergement-restauration"><span class="nav-dropdown-item-code">I</span>Hébergement et restauration</a>
+          <a class="nav-dropdown-item" href="/secteur/information-communication"><span class="nav-dropdown-item-code">J</span>Information et communication</a>
+          <a class="nav-dropdown-item" href="/secteur/finance-assurance"><span class="nav-dropdown-item-code">K</span>Finance et assurance</a>
+          <a class="nav-dropdown-item" href="/secteur/immobilier"><span class="nav-dropdown-item-code">L</span>Immobilier</a>
+          <a class="nav-dropdown-item" href="/secteur/services-specialises"><span class="nav-dropdown-item-code">M</span>Services spécialisés</a>
+          <a class="nav-dropdown-item" href="/secteur/services-administratifs"><span class="nav-dropdown-item-code">N</span>Services administratifs</a>
+          <a class="nav-dropdown-item" href="/secteur/administration-publique"><span class="nav-dropdown-item-code">O</span>Administration publique</a>
+          <a class="nav-dropdown-item" href="/secteur/enseignement"><span class="nav-dropdown-item-code">P</span>Enseignement</a>
+          <a class="nav-dropdown-item" href="/secteur/sante"><span class="nav-dropdown-item-code">Q</span>Santé et social</a>
+          <a class="nav-dropdown-item" href="/secteur/arts-loisirs"><span class="nav-dropdown-item-code">R</span>Arts et loisirs</a>
+          <a class="nav-dropdown-item" href="/secteur/autres-services"><span class="nav-dropdown-item-code">S</span>Autres services</a>
+        </div>
+      </div>
+    </div>
     <a class="nav-link" href="methodologie.html">Méthodologie</a>
     <a class="nav-link" href="https://www.in-france.fr/a-propos" target="_blank">À propos</a>
   </nav>
@@ -1081,8 +1180,8 @@
       </div>
       <h1>Votre entreprise<br>crée plus de valeur<br>que vous ne <span class="h1-accent">pensez.</span></h1>
       <p class="hero-sub">
-        Chaque euro de chiffre d'affaires déclenche une chaîne invisible —
-        emplois, salaires, taxes — dans toute l'économie française.
+        Chaque euro de chiffre d'affaires déclenche une chaîne invisible :
+        emplois, salaires, taxes, dans toute l'économie française.
         Mesurez-la en 30 secondes.
       </p>
       <div class="hero-bullets">
@@ -1138,7 +1237,7 @@
 
       <!-- Email -->
       <div class="hf-field">
-        <label class="hf-label" for="emailInput">Email — recevez vos résultats</label>
+        <label class="hf-label" for="emailInput">Email (recevez vos résultats)</label>
         <div class="hf-input-wrap">
           <input class="hf-input" type="email" id="emailInput"
             placeholder="vous@entreprise.fr">
@@ -1197,15 +1296,15 @@
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/>
     </svg>
-    <span id="emailBannerText">Rapport envoyé à —</span>
+    <span id="emailBannerText">Rapport envoyé à</span>
   </div>
 
   <!-- Header -->
   <div class="res-header">
     <div class="fr-flag"><div></div><div></div><div></div></div>
     <div>
-      <div class="res-company" id="resCompany">—</div>
-      <div class="res-meta" id="resMeta">—</div>
+      <div class="res-company" id="resCompany"></div>
+      <div class="res-meta" id="resMeta"></div>
       <div class="tricolor-accent">
         <div style="background:var(--fr-blue)"></div>
         <div style="background:#ddd"></div>
@@ -1218,31 +1317,31 @@
   <div class="kpi-grid">
     <div class="kpi">
       <div class="kpi-label"><div class="kpi-dot" style="background:var(--fr-blue)"></div>Emplois générés</div>
-      <div class="kpi-value" id="kpiEmplois">—</div>
-      <div class="kpi-sub" id="kpiEmploisSub">—</div>
+      <div class="kpi-value" id="kpiEmplois">...</div>
+      <div class="kpi-sub" id="kpiEmploisSub">...</div>
       <div class="kpi-bench" id="kpiBenchEmplois"></div>
     </div>
     <div class="kpi">
       <div class="kpi-label"><div class="kpi-dot" style="background:#7088b8"></div>Valeur ajoutée</div>
-      <div class="kpi-value" id="kpiVa">—</div>
-      <div class="kpi-sub" id="kpiVaSub">—</div>
+      <div class="kpi-value" id="kpiVa">...</div>
+      <div class="kpi-sub" id="kpiVaSub">...</div>
       <div class="kpi-bench" id="kpiBenchVa"></div>
     </div>
     <div class="kpi">
       <div class="kpi-label"><div class="kpi-dot" style="background:var(--fr-red)"></div>Contributions fiscales</div>
-      <div class="kpi-value" id="kpiTaxes">—</div>
-      <div class="kpi-sub" id="kpiTaxesSub">—</div>
+      <div class="kpi-value" id="kpiTaxes">...</div>
+      <div class="kpi-sub" id="kpiTaxesSub">...</div>
       <div class="kpi-bench" id="kpiBenchTaxes"></div>
     </div>
   </div>
 
   <!-- Multiplier -->
   <div class="mult-banner">
-    <div class="mult-num" id="multNum">—<span class="mult-x">×</span></div>
+    <div class="mult-num" id="multNum">...<span class="mult-x">×</span></div>
     <div class="mult-body">
       <div class="mult-title">Multiplicateur d'emploi</div>
       <div class="mult-desc">
-        Pour 1 emploi direct, <strong id="multExtra">—</strong> emplois supplémentaires
+        Pour 1 emploi direct, <strong id="multExtra">...</strong> emplois supplémentaires
         générés dans l'économie française via les achats intermédiaires et la consommation des ménages.
       </div>
     </div>
@@ -1256,7 +1355,7 @@
       <div class="results-cta-title">Transformez cette simulation en rapport complet</div>
       <div class="results-cta-sub">
         Nos experts analysent la structure réelle de votre entreprise et produisent
-        un rapport d'impact territorial sur-mesure — pour vos investisseurs, collectivités ou partenaires.
+        un rapport d'impact territorial sur-mesure, pour vos investisseurs, collectivités ou partenaires.
       </div>
     </div>
     <a class="results-cta-btn" href="https://www.in-france.fr/demo" target="_blank">
@@ -1281,19 +1380,19 @@
           <tbody>
             <tr>
               <td><span class="layer-dot" style="background:var(--fr-blue)"></span>Direct</td>
-              <td id="d-va">—</td><td id="d-sal">—</td><td id="d-emp">—</td>
+              <td id="d-va">...</td><td id="d-sal">...</td><td id="d-emp">...</td>
             </tr>
             <tr>
               <td><span class="layer-dot" style="background:#7088b8"></span>Indirect</td>
-              <td id="i-va">—</td><td id="i-sal">—</td><td id="i-emp">—</td>
+              <td id="i-va">...</td><td id="i-sal">...</td><td id="i-emp">...</td>
             </tr>
             <tr>
               <td><span class="layer-dot" style="background:var(--fr-red)"></span>Induit</td>
-              <td id="u-va">—</td><td id="u-sal">—</td><td id="u-emp">—</td>
+              <td id="u-va">...</td><td id="u-sal">...</td><td id="u-emp">...</td>
             </tr>
             <tr class="total">
               <td>Total</td>
-              <td id="t-va">—</td><td id="t-sal">—</td><td id="t-emp">—</td>
+              <td id="t-va">...</td><td id="t-sal">...</td><td id="t-emp">...</td>
             </tr>
           </tbody>
         </table>
@@ -1316,7 +1415,7 @@
           </div>
           <div class="radar-legend-item">
             <div class="radar-legend-line" style="background:rgba(237,41,57,.65)"></div>
-            <span>Moy. sectorielle — <span id="legendSector">—</span></span>
+            <span>Moy. sectorielle · <span id="legendSector">...</span></span>
           </div>
           <div class="radar-legend-item">
             <div class="radar-legend-line" style="background:rgba(100,116,139,.4)"></div>
@@ -1344,7 +1443,7 @@
   <div class="sim-disclaimer">
     <div class="sim-disclaimer-icon">i</div>
     <div>
-      <strong>Résultats indicatifs — Simulation basée sur notre méthodologie.</strong>
+      <strong>Résultats indicatifs. Simulation basée sur notre méthodologie.</strong>
       Les chiffres présentés sont des estimations calculées à partir des ratios sectoriels
       BdF FIBEN 2024, de la matrice Leontief OCDE ICIO 2023 et des données de consommation
       Eurostat HBS 2020. Ils ne constituent pas un bilan comptable ou un audit économique.
@@ -1484,7 +1583,7 @@ async function lookupBySiren(siren) {
     const res = d.results?.[0];
     if (!res) { setSearchIcon('err','✗'); closeAC(); return; }
     pickCompany(res.siren, res.nom_complet||siren, res.activite_principale||'');
-  } catch { setSearchIcon('err','—'); }
+  } catch { setSearchIcon('err','!'); }
 }
 
 function renderAC(results) {
@@ -1600,7 +1699,7 @@ function render(data, email) {
   // Header
   document.getElementById('resCompany').textContent = entreprise.nom || secteur.libelle;
   document.getElementById('resMeta').textContent =
-    `Section ${naf} — ${secteur.libelle} · CA déclaré : ${fmt(ca)}`;
+    `Section ${naf} · ${secteur.libelle} · CA déclaré : ${fmt(ca)}`;
 
   // Métriques calculées
   const emploisMca   = t.emplois / (ca/1_000_000);
@@ -1745,6 +1844,46 @@ function renderRadar(naf, multi, vaSurCa, emploisMca, partSalaires, partTaxes, i
     }
   });
 }
+
+// ─── AUTO-SIMULATE FROM SECTOR PAGES ──────────────────────────────────────────
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('auto') !== '1') return;
+  const siren = params.get('siren');
+  const ca = params.get('ca');
+  const email = params.get('email') || '';
+
+  if (!siren || !ca) return;
+
+  // Clean URL
+  window.history.replaceState({}, '', '/');
+
+  // Fill form and trigger
+  async function autoRun() {
+    // Lookup company
+    try {
+      const r = await fetch('https://recherche-entreprises.api.gouv.fr/search?q=' + siren + '&per_page=1');
+      const d = await r.json();
+      if (d.results && d.results.length) {
+        pickCompany(d.results[0]);
+      } else {
+        selectedSiren = siren;
+      }
+    } catch(e) {
+      selectedSiren = siren;
+    }
+
+    // Fill CA
+    caInput.value = parseInt(ca).toLocaleString('fr-FR');
+
+    // Fill email
+    if (email) document.getElementById('emailInput').value = email;
+
+    // Trigger simulation
+    setTimeout(() => calculate(), 400);
+  }
+  autoRun();
+})();
 </script>
 </body>
 </html>

@@ -1,16 +1,45 @@
 {
   "rewrites": [
-    { "source": "/methodologie", "destination": "/methodologie.html" },
-    { "source": "/",             "destination": "/index.html" }
+    { "source": "/",                              "destination": "/index.html" },
+    { "source": "/methodologie",                  "destination": "/methodologie.html" },
+    { "source": "/a-propos",                      "destination": "/a-propos.html" },
+    { "source": "/impact",                        "destination": "/impact.html" },
+    { "source": "/cas-usage",                     "destination": "/cas-usage.html" },
+    { "source": "/cas-usage/amazon",              "destination": "/cas-usage-amazon.html" },
+    { "source": "/cas-usage/groupama",            "destination": "/cas-usage-groupama.html" },
+    { "source": "/cas-usage/24h-du-mans",         "destination": "/cas-usage-24h-du-mans.html" },
+    { "source": "/cas-usage/carbone-4",           "destination": "/cas-usage-carbone-4.html" },
+    { "source": "/cas-usage/afjel",               "destination": "/cas-usage-afjel.html" },
+    { "source": "/cas-usage/ministere-interieur", "destination": "/cas-usage-ministere.html" },
+    { "source": "/contact",                       "destination": "/contact.html" },
+
+    { "source": "/secteur/agriculture",            "destination": "/secteur-agriculture.html" },
+    { "source": "/secteur/industries-extractives",  "destination": "/secteur-industries-extractives.html" },
+    { "source": "/secteur/industrie-manufacturiere","destination": "/secteur-industrie-manufacturiere.html" },
+    { "source": "/secteur/energie",                 "destination": "/secteur-energie.html" },
+    { "source": "/secteur/eau-dechets",             "destination": "/secteur-eau-dechets.html" },
+    { "source": "/secteur/construction",            "destination": "/secteur-construction.html" },
+    { "source": "/secteur/commerce",                "destination": "/secteur-commerce.html" },
+    { "source": "/secteur/transports",              "destination": "/secteur-transports.html" },
+    { "source": "/secteur/hebergement-restauration","destination": "/secteur-hebergement-restauration.html" },
+    { "source": "/secteur/information-communication","destination": "/secteur-information-communication.html" },
+    { "source": "/secteur/finance-assurance",       "destination": "/secteur-finance-assurance.html" },
+    { "source": "/secteur/immobilier",              "destination": "/secteur-immobilier.html" },
+    { "source": "/secteur/services-specialises",    "destination": "/secteur-services-specialises.html" },
+    { "source": "/secteur/services-administratifs", "destination": "/secteur-services-administratifs.html" },
+    { "source": "/secteur/administration-publique", "destination": "/secteur-administration-publique.html" },
+    { "source": "/secteur/enseignement",            "destination": "/secteur-enseignement.html" },
+    { "source": "/secteur/sante",                   "destination": "/secteur-sante.html" },
+    { "source": "/secteur/arts-loisirs",            "destination": "/secteur-arts-loisirs.html" },
+    { "source": "/secteur/autres-services",         "destination": "/secteur-autres-services.html" }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options",  "value": "nosniff" },
-        { "key": "X-Frame-Options",         "value": "DENY" },
-        { "key": "X-XSS-Protection",        "value": "1; mode=block" },
-        { "key": "Referrer-Policy",         "value": "strict-origin-when-cross-origin" }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options",        "value": "DENY" },
+        { "key": "Referrer-Policy",        "value": "strict-origin-when-cross-origin" }
       ]
     },
     {

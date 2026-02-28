@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO -->
+<title>Impact territorial du secteur Transports en France | IN France</title>
+<meta name="description" content="Calculez l'impact économique de votre entreprise dans le secteur transports et entreposage. 193 101 entreprises, 1 287 643 emplois, multiplicateur 1.88×. Simulation gratuite.">
+<meta name="keywords" content="impact territorial transports, transports et entreposage France, multiplicateur emploi transports, valeur ajoutée transports, emplois transports France, simulateur impact transports">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://simulateur.in-france.fr/secteur/transports">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://simulateur.in-france.fr/secteur/transports">
+<meta property="og:title" content="Impact territorial · Transports | IN France">
+<meta property="og:description" content="193 101 entreprises, 1 287 643 emplois, multiplicateur 1.88×. Simulez l'impact de votre entreprise.">
+<meta property="og:image" content="https://simulateur.in-france.fr/og-image.png">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="IN France">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Impact territorial · Transports | IN France">
+<meta name="twitter:description" content="Simulez l'impact économique de votre entreprise dans le secteur transports : emplois, VA, taxes.">
+
+<!-- Schema.org FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quel est le multiplicateur d'emploi du secteur transport ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le multiplicateur d'emploi du transport est de 1,88×. Pour chaque emploi direct dans le transport, 0,88 emploi supplémentaire est créé dans l'économie via les achats intermédiaires et la consommation des salariés."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien d'emplois le transport génère-t-il en France ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le secteur transport emploie directement 1,4 million de personnes. Avec son multiplicateur de 1,88×, il soutient environ 2,6 millions d'emplois au total dans l'économie française."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment mesurer l'impact d'une entreprise de transport ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le simulateur IN France prend en compte les spécificités du secteur transport : forte intensité en main-d'œuvre (76,4 % de la VA en salaires), achats d'énergie, et effets d'entraînement sur la logistique et la maintenance."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{--bg:#fff;--fg:#0d1b2a;--card:#fff;--muted:#f3f5f9;--muted-fg:#64748b;--border:#dde3ee;--radius:6px;--fr-blue:#002395;--fr-red:#ED2939;--green:#16a34a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:'Geist',-apple-system,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* Header */
+.site-header{border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;padding:0 32px;gap:24px;position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);z-index:100}
+.logo{display:flex;align-items:baseline;gap:5px;text-decoration:none}
+.logo-in{font-size:16px;font-weight:700;letter-spacing:-.4px;color:var(--fr-blue)}
+.logo-france{font-size:16px;font-weight:700;letter-spacing:-.4px;color:var(--fr-red)}
+.header-sep{width:1px;height:18px;background:var(--border)}
+.site-nav{display:flex;gap:2px}
+.nav-link{padding:4px 10px;font-size:13px;color:var(--muted-fg);border-radius:4px;text-decoration:none;transition:all .12s}
+.nav-link:hover,.nav-link.active{background:var(--muted);color:var(--fg);font-weight:500}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--muted-fg);font-family:'Geist Mono',monospace}
+.chip-dot{width:5px;height:5px;border-radius:50%;background:var(--green)}
+.btn-demo{display:inline-flex;align-items:center;height:32px;padding:0 14px;background:var(--fr-blue);color:#fff;border:none;border-radius:var(--radius);font-family:'Geist',sans-serif;font-size:13px;font-weight:500;text-decoration:none;transition:all .15s;white-space:nowrap}
+.btn-demo:hover{background:#001c7a;transform:translateY(-1px)}
+
+/* Dropdown */
+.nav-dropdown{position:relative}
+.nav-dropdown-toggle{padding:4px 10px;font-size:13px;color:var(--muted-fg);border-radius:4px;cursor:pointer;transition:all .12s;display:flex;align-items:center;gap:4px;background:none;border:none;font-family:'Geist',sans-serif}
+.nav-dropdown-toggle:hover,.nav-dropdown.open .nav-dropdown-toggle{background:var(--muted);color:var(--fg);font-weight:500}
+.nav-dropdown-toggle svg{transition:transform .2s}
+.nav-dropdown.open .nav-dropdown-toggle svg{transform:rotate(180deg)}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:0 12px 40px rgba(0,0,0,.12);z-index:200;width:540px;padding:16px;max-height:70vh;overflow-y:auto}
+.nav-dropdown.open .nav-dropdown-menu{display:block}
+.nav-dropdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.nav-dropdown-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--radius);text-decoration:none;color:var(--fg);font-size:13px;transition:background .1s}
+.nav-dropdown-item:hover{background:var(--muted)}
+.nav-dropdown-item-code{font-family:'Geist Mono',monospace;font-size:10px;font-weight:600;color:var(--fr-blue);background:var(--muted);border:1px solid var(--border);width:22px;height:22px;border-radius:4px;display:grid;place-items:center;flex-shrink:0}
+.nav-dropdown-item-label{line-height:1.3}
+.nav-dropdown-item-sub{font-size:10px;color:var(--muted-fg);display:block}
+.nav-dropdown-backdrop{display:none;position:fixed;inset:0;z-index:150}
+.nav-dropdown.open .nav-dropdown-backdrop{display:block}
+@media(max-width:768px){
+  .nav-dropdown-menu{width:calc(100vw - 32px);left:auto;right:-60px;transform:none}
+  .nav-dropdown-grid{grid-template-columns:1fr}
+}
+
+/* Hero */
+.hero{background:var(--bg);position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.tricolor-top{display:flex;height:3px}
+.tricolor-top div:nth-child(1){flex:1;background:var(--fr-blue)}
+.tricolor-top div:nth-child(2){flex:1;background:#e8e8e8}
+.tricolor-top div:nth-child(3){flex:1;background:var(--fr-red)}
+.hero-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:52px 52px;opacity:.28;pointer-events:none}
+.hero-glow{position:absolute;bottom:-30%;left:-5%;width:500px;height:500px;background:radial-gradient(ellipse,rgba(0,35,149,.05) 0%,transparent 68%);pointer-events:none}
+.hero-inner{max-width:920px;margin:0 auto;padding:56px 32px 60px;position:relative;z-index:1;display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:16px}
+.hero-eyebrow-bar{width:20px;height:1px;background:var(--border)}
+.hero h1{font-size:clamp(24px,3.5vw,36px);font-weight:700;letter-spacing:-1px;line-height:1.12;margin-bottom:16px}
+.h1-accent{background:linear-gradient(120deg,var(--fr-blue) 0%,var(--fr-red) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:15px;font-weight:300;color:var(--muted-fg);line-height:1.7;margin-bottom:24px;max-width:420px}
+.hero-stats{display:flex;gap:20px;flex-wrap:wrap}
+.hero-stat{display:flex;flex-direction:column;gap:2px}
+.hero-stat-val{font-size:20px;font-weight:700;letter-spacing:-.5px;color:var(--fg);font-family:'Geist Mono',monospace}
+.hero-stat-label{font-size:11px;color:var(--muted-fg);text-transform:uppercase;letter-spacing:.06em}
+.hero-source{font-size:11px;color:var(--muted-fg);margin-top:12px;font-style:italic}
+
+/* Form card */
+.hero-form-card{background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:0 4px 24px rgba(0,35,149,.06),0 1px 4px rgba(0,0,0,.04);padding:24px 20px}
+.hero-form-card-title{font-size:15px;font-weight:600;margin-bottom:4px}
+.hero-form-card-sub{font-size:12px;color:var(--muted-fg);margin-bottom:18px;display:flex;align-items:center;gap:6px}
+.free-badge{display:inline-flex;align-items:center;gap:4px;background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;font-size:10px;font-weight:600;padding:1px 7px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase}
+.hf-field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.hf-label{font-size:11px;font-weight:500;color:var(--muted-fg);letter-spacing:.06em;text-transform:uppercase}
+.hf-input-wrap{position:relative}
+.hf-input{width:100%;height:38px;padding:0 38px 0 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);font-family:'Geist',sans-serif;font-size:13px;color:var(--fg);outline:none;transition:border-color .15s,box-shadow .15s}
+.hf-input::placeholder{color:#a0aec0}
+.hf-input:focus{border-color:var(--fr-blue);box-shadow:0 0 0 3px rgba(0,35,149,.08)}
+.hf-input-icon{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted-fg);font-family:'Geist Mono',monospace;pointer-events:none}
+.hf-input-icon.ok{color:var(--green)}
+.hf-input-icon.err{color:var(--fr-red)}
+.hf-input-icon.spin{animation:blink .8s steps(1) infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hf-dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,.14);z-index:300;max-height:200px;overflow-y:auto;display:none}
+.hf-dropdown.open{display:block}
+.hf-ac-item{padding:9px 12px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .1s}
+.hf-ac-item:last-child{border-bottom:none}
+.hf-ac-item:hover,.hf-ac-item.focused{background:var(--muted)}
+.hf-ac-name{font-size:13px;font-weight:500}
+.hf-ac-meta{font-size:11px;color:var(--muted-fg);font-family:'Geist Mono',monospace;margin-top:1px;display:flex;gap:8px}
+.hf-ac-empty{padding:12px;font-size:13px;color:var(--muted-fg);text-align:center}
+.hf-company-chip{display:none;align-items:center;gap:6px;padding:5px 10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;font-size:12px;color:#15803d;margin-top:4px}
+.hf-company-chip.show{display:flex}
+.hf-company-chip-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0}
+.hf-company-chip-naf{margin-left:auto;font-family:'Geist Mono',monospace;font-size:10px;background:#dcfce7;color:#15803d;padding:1px 6px;border-radius:3px}
+.hf-input-mono{font-family:'Geist Mono',monospace}
+.hf-email-note{font-size:11px;color:var(--muted-fg);margin-top:3px;display:flex;align-items:center;gap:4px}
+.cta-btn{width:100%;height:42px;background:var(--fr-red);color:#fff;border:none;border-radius:var(--radius);font-family:'Geist',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px}
+.cta-btn:hover{background:#d42233;transform:translateY(-1px);box-shadow:0 4px 16px rgba(237,41,57,.35)}
+.cta-privacy{text-align:center;font-size:11px;color:var(--muted-fg);margin-top:8px}
+.hf-alert{display:none;align-items:flex-start;gap:7px;padding:8px 11px;background:#fff0f1;border:1px solid #fcc;border-radius:4px;font-size:12px;color:var(--fr-red);margin-top:10px;line-height:1.4}
+.hf-alert.show{display:flex}
+
+/* Trust bar */
+.trust-bar{background:#f8f9fc;border-bottom:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted-fg)}
+.trust-item strong{color:var(--fg);font-weight:600}
+.trust-dot{width:4px;height:4px;border-radius:50%;background:var(--border)}
+
+/* Metrics section */
+.metrics-section{max-width:920px;margin:0 auto;padding:56px 32px}
+.metrics-section h2{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.6px;margin-bottom:8px}
+.metrics-sub{font-size:14px;color:var(--muted-fg);margin-bottom:32px;max-width:600px;line-height:1.65}
+.metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.metric-card{background:var(--bg);padding:24px}
+.metric-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--muted-fg);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.metric-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.metric-value{font-size:28px;font-weight:700;letter-spacing:-.8px;line-height:1;margin-bottom:6px;font-variant-numeric:tabular-nums}
+.metric-desc{font-size:12px;color:var(--muted-fg);line-height:1.5}
+.metric-bench{margin-top:6px;font-size:11px;font-family:'Geist Mono',monospace}
+.metric-bench .above{color:var(--fr-blue)}
+.metric-bench .below{color:var(--fr-red)}
+
+/* Content section */
+.content-section{border-top:1px solid var(--border);background:var(--muted)}
+.content-inner{max-width:920px;margin:0 auto;padding:56px 32px;display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:start}
+.content-main h2{font-size:clamp(18px,2.5vw,24px);font-weight:700;letter-spacing:-.5px;margin-bottom:16px}
+.content-main h3{font-size:16px;font-weight:600;margin:28px 0 10px;display:flex;align-items:center;gap:8px}
+.content-main h3::before{content:'';width:3px;height:16px;background:var(--fr-blue);border-radius:2px;flex-shrink:0}
+.content-main p{font-size:14px;color:var(--muted-fg);line-height:1.75;margin-bottom:12px}
+
+/* Supply chain sidebar */
+.sc-card{border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);padding:20px}
+.sc-card-title{font-size:13px;font-weight:600;margin-bottom:4px}
+.sc-card-sub{font-size:11px;color:var(--muted-fg);margin-bottom:16px}
+.sc-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.sc-item:last-child{border-bottom:none}
+.sc-left{display:flex;align-items:center;gap:6px;min-width:140px}
+.sc-pill{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:var(--muted);border:1px solid var(--border);border-radius:4px;font-size:10px;font-weight:600;font-family:'Geist Mono',monospace;color:var(--fr-blue);flex-shrink:0}
+.sc-label{font-size:12px;color:var(--fg)}
+.sc-bar-wrap{flex:1;height:6px;background:var(--muted);border-radius:3px;overflow:hidden}
+.sc-bar{height:100%;background:linear-gradient(90deg,var(--fr-blue),#4a6dd8);border-radius:3px}
+.sc-val{font-size:11px;font-family:'Geist Mono',monospace;color:var(--muted-fg);min-width:40px;text-align:right}
+
+/* CTA section */
+.sector-cta{border-top:1px solid var(--border);background:var(--bg)}
+.sector-cta-inner{max-width:920px;margin:0 auto;padding:56px 32px;text-align:center}
+.sector-cta-inner h2{font-size:clamp(18px,2.5vw,24px);font-weight:700;letter-spacing:-.5px;margin-bottom:8px}
+.sector-cta-inner p{font-size:14px;color:var(--muted-fg);margin-bottom:24px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.65}
+.cta-link{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 28px;background:var(--fr-red);color:#fff;border-radius:var(--radius);font-size:14px;font-weight:600;text-decoration:none;transition:all .15s}
+.cta-link:hover{background:#d42233;transform:translateY(-1px);box-shadow:0 4px 16px rgba(237,41,57,.35)}
+.cta-secondary{display:inline-flex;align-items:center;gap:6px;margin-left:12px;height:44px;padding:0 20px;background:var(--bg);color:var(--fg);border:1px solid var(--border);border-radius:var(--radius);font-size:13px;font-weight:500;text-decoration:none;transition:all .15s}
+.cta-secondary:hover{border-color:var(--fr-blue);color:var(--fr-blue)}
+
+/* FAQ */
+.faq-section{border-top:1px solid var(--border)}
+.faq-inner{max-width:920px;margin:0 auto;padding:56px 32px}
+.faq-inner h2{font-size:clamp(18px,2.5vw,24px);font-weight:700;letter-spacing:-.5px;margin-bottom:24px}
+.faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;overflow:hidden;background:var(--bg)}
+.faq-q{width:100%;padding:16px 20px;background:none;border:none;font-family:'Geist',sans-serif;font-size:14px;font-weight:500;color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left}
+.faq-q svg{flex-shrink:0;transition:transform .2s;color:var(--muted-fg)}
+.faq-item.open .faq-q svg{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-item.open .faq-a{max-height:300px}
+.faq-a p{padding:0 20px 16px;font-size:14px;color:var(--muted-fg);line-height:1.75}
+
+/* Other sectors */
+.other-sectors{border-top:1px solid var(--border);background:var(--muted)}
+.other-sectors-inner{max-width:920px;margin:0 auto;padding:48px 32px}
+.other-sectors-inner h3{font-size:16px;font-weight:600;margin-bottom:16px}
+.sector-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.sector-link{display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);text-decoration:none;color:var(--fg);font-size:13px;transition:border-color .15s,box-shadow .15s}
+.sector-link:hover{border-color:var(--fr-blue);box-shadow:0 2px 8px rgba(0,35,149,.08)}
+.sector-link-code{font-family:'Geist Mono',monospace;font-size:11px;font-weight:600;color:var(--fr-blue);background:var(--muted);border:1px solid var(--border);width:24px;height:24px;border-radius:4px;display:grid;place-items:center;flex-shrink:0}
+
+/* Footer */
+.site-footer{border-top:1px solid var(--border);padding:40px 32px}
+.footer-inner{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}
+.footer-logo{display:flex;align-items:baseline;gap:5px;margin-bottom:8px}
+.footer-sub{font-size:12px;color:var(--muted-fg);line-height:1.55;max-width:220px}
+.footer-made{margin-top:10px;font-size:11px;color:var(--muted-fg)}
+.footer-col-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.footer-links{display:flex;flex-direction:column;gap:7px}
+.footer-link{font-size:13px;color:var(--muted-fg);text-decoration:none;transition:color .12s}
+.footer-link:hover{color:var(--fg)}
+.footer-bottom{max-width:920px;margin:24px auto 0;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;color:var(--muted-fg)}
+
+/* Responsive */
+@media(max-width:768px){
+  .site-header{padding:0 16px}
+  .site-nav .nav-link:not(.active){display:none}
+  .hero-inner{grid-template-columns:1fr;padding:36px 16px 40px;gap:28px}
+  .hero-stats{gap:16px}
+  .metrics-section{padding:36px 16px}
+  .metrics-grid{grid-template-columns:1fr}
+  .content-inner{grid-template-columns:1fr;padding:36px 16px}
+  .sector-cta-inner{padding:36px 16px}
+  .faq-inner{padding:36px 16px}
+  .other-sectors-inner{padding:36px 16px}
+  .sector-links{grid-template-columns:1fr}
+  .trust-bar{padding:12px 16px;gap:16px}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <a class="logo" href="/">
+    <span class="logo-in">IN</span>
+    <span class="logo-france">FRANCE</span>
+  </a>
+  <div class="header-sep"></div>
+  <nav class="site-nav">
+    <a class="nav-link" href="/">Simulateur</a>
+    <div class="nav-dropdown" id="secDropdown">
+      <div class="nav-dropdown-backdrop" onclick="document.getElementById('secDropdown').classList.remove('open')"></div>
+      <button class="nav-dropdown-toggle" onclick="this.parentElement.classList.toggle('open')">
+        Secteurs
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-grid">
+          <a class="nav-dropdown-item" href="/secteur/agriculture">
+            <span class="nav-dropdown-item-code">A</span>
+            <span class="nav-dropdown-item-label">Agriculture</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/industries-extractives">
+            <span class="nav-dropdown-item-code">B</span>
+            <span class="nav-dropdown-item-label">Industries extractives</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/industrie-manufacturiere">
+            <span class="nav-dropdown-item-code">C</span>
+            <span class="nav-dropdown-item-label">Industrie manufacturière</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/energie">
+            <span class="nav-dropdown-item-code">D</span>
+            <span class="nav-dropdown-item-label">Énergie</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/eau-dechets">
+            <span class="nav-dropdown-item-code">E</span>
+            <span class="nav-dropdown-item-label">Eau et déchets</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/construction">
+            <span class="nav-dropdown-item-code">F</span>
+            <span class="nav-dropdown-item-label">Construction</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/commerce">
+            <span class="nav-dropdown-item-code">G</span>
+            <span class="nav-dropdown-item-label">Commerce</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/transports">
+            <span class="nav-dropdown-item-code">H</span>
+            <span class="nav-dropdown-item-label">Transports</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/hebergement-restauration">
+            <span class="nav-dropdown-item-code">I</span>
+            <span class="nav-dropdown-item-label">Hébergement et restauration</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/information-communication">
+            <span class="nav-dropdown-item-code">J</span>
+            <span class="nav-dropdown-item-label">Information et communication</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/finance-assurance">
+            <span class="nav-dropdown-item-code">K</span>
+            <span class="nav-dropdown-item-label">Finance et assurance</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/immobilier">
+            <span class="nav-dropdown-item-code">L</span>
+            <span class="nav-dropdown-item-label">Immobilier</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/services-specialises">
+            <span class="nav-dropdown-item-code">M</span>
+            <span class="nav-dropdown-item-label">Services spécialisés</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/services-administratifs">
+            <span class="nav-dropdown-item-code">N</span>
+            <span class="nav-dropdown-item-label">Services administratifs</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/administration-publique">
+            <span class="nav-dropdown-item-code">O</span>
+            <span class="nav-dropdown-item-label">Administration publique</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/enseignement">
+            <span class="nav-dropdown-item-code">P</span>
+            <span class="nav-dropdown-item-label">Enseignement</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/sante">
+            <span class="nav-dropdown-item-code">Q</span>
+            <span class="nav-dropdown-item-label">Santé et social</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/arts-loisirs">
+            <span class="nav-dropdown-item-code">R</span>
+            <span class="nav-dropdown-item-label">Arts et loisirs</span>
+          </a>
+          <a class="nav-dropdown-item" href="/secteur/autres-services">
+            <span class="nav-dropdown-item-code">S</span>
+            <span class="nav-dropdown-item-label">Autres services</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <a class="nav-link" href="/methodologie">Methodologie</a>
+    <a class="nav-link" href="https://www.in-france.fr/a-propos" target="_blank">A propos</a>
+  </nav>
+  <div class="header-right">
+    <div class="chip"><div class="chip-dot"></div>API live</div>
+    <a class="btn-demo" href="https://www.in-france.fr/demo" target="_blank">Prendre rendez-vous &rarr;</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="tricolor-top"><div></div><div></div><div></div></div>
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-bar"></div>
+        Impact territorial &middot; Secteur H
+      </div>
+      <h1>🚛 Transports et entreposage</h1>
+      <p class="hero-sub">Le transport et la logistique sont les artères de l'économie française. Routier, ferroviaire, aérien ou maritime, ce secteur assure la circulation des marchandises et des personnes, connectant producteurs et consommateurs.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-val">193 101</div>
+          <div class="hero-stat-label">Entreprises</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">1 287 643</div>
+          <div class="hero-stat-label">Emplois (EQTP)</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">1.88&times;</div>
+          <div class="hero-stat-label">Multiplicateur</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">267 Md€</div>
+          <div class="hero-stat-label">CA cumule</div>
+        </div>
+      </div>
+      <div class="hero-source">Source : INSEE ESANE 2023</div>
+    </div>
+
+    <!-- Form -->
+    <div class="hero-form-card">
+      <div class="hero-form-card-title">Simulez l'impact de votre entreprise</div>
+      <div class="hero-form-card-sub">
+        <span class="free-badge">&#10022; Gratuit</span>
+        Resultats instantanes
+      </div>
+
+      <div class="hf-field">
+        <label class="hf-label" for="searchInput">Entreprise (nom ou SIREN)</label>
+        <div class="hf-input-wrap">
+          <input class="hf-input" type="text" id="searchInput" placeholder="Ex : Bouygues ou 572015246" autocomplete="off" spellcheck="false">
+          <span class="hf-input-icon" id="searchIcon"></span>
+          <div class="hf-dropdown" id="acDropdown"></div>
+        </div>
+        <div class="hf-company-chip" id="companyChip">
+          <div class="hf-company-chip-dot"></div>
+          <span id="chipName"></span>
+          <span class="hf-company-chip-naf" id="chipNaf"></span>
+        </div>
+      </div>
+
+      <div class="hf-field">
+        <label class="hf-label" for="caInput">Chiffre d'affaires annuel HT</label>
+        <div class="hf-input-wrap">
+          <input class="hf-input hf-input-mono" type="text" id="caInput" placeholder="5 000 000">
+          <span class="hf-input-icon">&euro;</span>
+        </div>
+      </div>
+
+      <div class="hf-field">
+        <label class="hf-label" for="emailInput">Email (recevez vos resultats)</label>
+        <div class="hf-input-wrap">
+          <input class="hf-input" type="email" id="emailInput" placeholder="vous@entreprise.fr">
+          <span class="hf-input-icon">&#9993;</span>
+        </div>
+        <div class="hf-email-note">&#128274; Confidentiel &middot; Jamais revendu</div>
+      </div>
+
+      <button class="cta-btn" id="ctaBtn" onclick="goSimulate()">
+        Simuler l'impact &rarr;
+      </button>
+      <div class="cta-privacy">Simulation 100 % gratuite &middot; Donnees BdF, OCDE &amp; Eurostat</div>
+
+      <div class="hf-alert" id="heroAlert">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span id="alertText"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust bar -->
+<div class="trust-bar">
+  <div class="trust-item"><strong>BdF FIBEN</strong> <span>Ratios sectoriels 2024</span></div>
+  <div class="trust-dot"></div>
+  <div class="trust-item"><strong>OCDE ICIO</strong> <span>Matrices Leontief 2023</span></div>
+  <div class="trust-dot"></div>
+  <div class="trust-item"><strong>Eurostat HBS</strong> <span>Consommation menages 2020</span></div>
+  <div class="trust-dot"></div>
+  <div class="trust-item"><strong>INSEE SIRENE</strong> <span>Base entreprises officielle</span></div>
+</div>
+
+<!-- Key Metrics -->
+<section class="metrics-section">
+  <h2>Chiffres cles du secteur Transports en France</h2>
+  <p class="metrics-sub">Donnees issues de la Banque de France (FIBEN 2024), de l'OCDE (ICIO 2023) et d'Eurostat (HBS 2020).</p>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label"><div class="metric-dot" style="background:var(--fr-blue)"></div>Multiplicateur d'emploi</div>
+      <div class="metric-value">1.88&times;</div>
+      <div class="metric-desc">Pour 1 emploi direct, 0.88 emplois supplementaires generes</div>
+      <div class="metric-bench">vs. national : <span class="above">+3%</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label"><div class="metric-dot" style="background:#7088b8"></div>Valeur ajoutee / CA</div>
+      <div class="metric-value">32 %</div>
+      <div class="metric-desc">Taux de valeur ajoutee sectoriel</div>
+      <div class="metric-bench">vs. national : <span class="below">-0%</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label"><div class="metric-dot" style="background:var(--fr-red)"></div>Emplois par M&euro; de CA</div>
+      <div class="metric-value">16.2</div>
+      <div class="metric-desc">Intensite en main-d'oeuvre du secteur</div>
+      <div class="metric-bench">vs. national : <span class="above">+14%</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label"><div class="metric-dot" style="background:var(--green)"></div>Part des salaires</div>
+      <div class="metric-value">64 %</div>
+      <div class="metric-desc">Part de la VA redistribuee en salaires</div>
+      <div class="metric-bench">vs. national : <span class="above">+16%</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label"><div class="metric-dot" style="background:#e4a853"></div>Contributions fiscales</div>
+      <div class="metric-value">12.0 %</div>
+      <div class="metric-desc">Part de la VA versee en taxes</div>
+      <div class="metric-bench">vs. national : <span class="below">-6%</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label"><div class="metric-dot" style="background:#8b5cf6"></div>Impact indirect</div>
+      <div class="metric-value">37 %</div>
+      <div class="metric-desc">Part de l'impact total generee par la chaine d'approvisionnement</div>
+      <div class="metric-bench">vs. national : <span class="below">-3%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Content + Supply chain -->
+<section class="content-section">
+  <div class="content-inner">
+    <div class="content-main">
+      <h2>L'impact territorial du secteur transports en France</h2>
+      <p>Le secteur des transports et de l'entreposage en France compte 193 101 entreprises et emploie 1 287 643 salariés en EQTP (INSEE ESANE 2023). Avec un chiffre d'affaires de 267 milliards d'euros, il représente 4,5 % du PIB et constitue un maillon essentiel de toutes les chaînes de valeur.</p>
+
+      <h3>Effets directs</h3>
+      <p>Le taux de valeur ajoutée atteint 43,2 % du CA. La part des salaires est élevée (76,4 % de la VA), reflétant l'importance du facteur humain dans les activités de transport. Les contributions fiscales s'élèvent à 3,8 % de la VA.</p>
+
+      <h3>Effets indirects (chaine d'approvisionnement)</h3>
+      <p>Le transport active principalement l'énergie (carburants), l'industrie manufacturière (véhicules, pièces détachées), les services spécialisés (maintenance, ingénierie) et l'immobilier (entrepôts, plateformes logistiques).</p>
+
+      <h3>Effets induits (consommation des menages)</h3>
+      <p>Avec 1,4 million d'emplois répartis sur tout le territoire, des zones portuaires aux plateformes logistiques périurbaines, l'effet induit du transport est considérable et fortement ancré localement.</p>
+    </div>
+
+    <div class="content-sidebar">
+      <div class="sc-card">
+        <div class="sc-card-title">Secteurs actives par transports</div>
+        <div class="sc-card-sub">Coefficients Leontief OCDE ICIO 2023</div>
+        
+            <div class="sc-item">
+              <div class="sc-left">
+                <span class="sc-pill">N</span>
+                <span class="sc-label">Services admin.</span>
+              </div>
+              <div class="sc-bar-wrap">
+                <div class="sc-bar" style="width:24%"></div>
+              </div>
+              <span class="sc-val">0.080</span>
+            </div>
+            <div class="sc-item">
+              <div class="sc-left">
+                <span class="sc-pill">M</span>
+                <span class="sc-label">Services spécialisés</span>
+              </div>
+              <div class="sc-bar-wrap">
+                <div class="sc-bar" style="width:24%"></div>
+              </div>
+              <span class="sc-val">0.079</span>
+            </div>
+            <div class="sc-item">
+              <div class="sc-left">
+                <span class="sc-pill">C</span>
+                <span class="sc-label">Industrie manufacturière</span>
+              </div>
+              <div class="sc-bar-wrap">
+                <div class="sc-bar" style="width:19%"></div>
+              </div>
+              <span class="sc-val">0.063</span>
+            </div>
+            <div class="sc-item">
+              <div class="sc-left">
+                <span class="sc-pill">G</span>
+                <span class="sc-label">Commerce</span>
+              </div>
+              <div class="sc-bar-wrap">
+                <div class="sc-bar" style="width:15%"></div>
+              </div>
+              <span class="sc-val">0.049</span>
+            </div>
+            <div class="sc-item">
+              <div class="sc-left">
+                <span class="sc-pill">D</span>
+                <span class="sc-label">Énergie</span>
+              </div>
+              <div class="sc-bar-wrap">
+                <div class="sc-bar" style="width:8%"></div>
+              </div>
+              <span class="sc-val">0.026</span>
+            </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <h2>Questions frequentes sur le secteur Transports</h2>
+    
+          <div class="faq-item">
+            <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+              <span>Quel est le multiplicateur d'emploi du secteur transport ?</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><p>Le multiplicateur d'emploi du transport est de 1,88×. Pour chaque emploi direct dans le transport, 0,88 emploi supplémentaire est créé dans l'économie via les achats intermédiaires et la consommation des salariés.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+              <span>Combien d'emplois le transport génère-t-il en France ?</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><p>Le secteur transport emploie directement 1,4 million de personnes. Avec son multiplicateur de 1,88×, il soutient environ 2,6 millions d'emplois au total dans l'économie française.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+              <span>Comment mesurer l'impact d'une entreprise de transport ?</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><p>Le simulateur IN France prend en compte les spécificités du secteur transport : forte intensité en main-d'œuvre (76,4 % de la VA en salaires), achats d'énergie, et effets d'entraînement sur la logistique et la maintenance.</p></div>
+          </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sector-cta">
+  <div class="sector-cta-inner">
+    <h2>Mesurez l'impact de votre entreprise</h2>
+    <p>Calculez en 30 secondes les emplois, la valeur ajoutee et les taxes generees par votre entreprise dans le secteur transports.</p>
+    <a class="cta-link" href="/">Lancer la simulation &rarr;</a>
+    <a class="cta-secondary" href="https://www.in-france.fr/demo" target="_blank">Prendre rendez-vous</a>
+  </div>
+</section>
+
+<!-- Other sectors -->
+<section class="other-sectors">
+  <div class="other-sectors-inner">
+    <h3>Decouvrir les autres secteurs</h3>
+    <div class="sector-links">
+      <a class="sector-link" href="/secteur/agriculture">
+        <span class="sector-link-code">A</span>
+        Agriculture
+      </a>
+      <a class="sector-link" href="/secteur/industries-extractives">
+        <span class="sector-link-code">B</span>
+        Industries extractives
+      </a>
+      <a class="sector-link" href="/secteur/industrie-manufacturiere">
+        <span class="sector-link-code">C</span>
+        Industrie manufacturière
+      </a>
+      <a class="sector-link" href="/secteur/energie">
+        <span class="sector-link-code">D</span>
+        Énergie
+      </a>
+      <a class="sector-link" href="/secteur/eau-dechets">
+        <span class="sector-link-code">E</span>
+        Eau et déchets
+      </a>
+      <a class="sector-link" href="/secteur/construction">
+        <span class="sector-link-code">F</span>
+        Construction
+      </a>
+      <a class="sector-link" href="/secteur/commerce">
+        <span class="sector-link-code">G</span>
+        Commerce
+      </a>
+      <a class="sector-link" href="/secteur/hebergement-restauration">
+        <span class="sector-link-code">I</span>
+        Hébergement et restauration
+      </a>
+      <a class="sector-link" href="/secteur/information-communication">
+        <span class="sector-link-code">J</span>
+        Information et communication
+      </a>
+      <a class="sector-link" href="/secteur/finance-assurance">
+        <span class="sector-link-code">K</span>
+        Finance et assurance
+      </a>
+      <a class="sector-link" href="/secteur/immobilier">
+        <span class="sector-link-code">L</span>
+        Immobilier
+      </a>
+      <a class="sector-link" href="/secteur/services-specialises">
+        <span class="sector-link-code">M</span>
+        Services spécialisés
+      </a>
+      <a class="sector-link" href="/secteur/services-administratifs">
+        <span class="sector-link-code">N</span>
+        Services administratifs
+      </a>
+      <a class="sector-link" href="/secteur/administration-publique">
+        <span class="sector-link-code">O</span>
+        Administration publique
+      </a>
+      <a class="sector-link" href="/secteur/enseignement">
+        <span class="sector-link-code">P</span>
+        Enseignement
+      </a>
+      <a class="sector-link" href="/secteur/sante">
+        <span class="sector-link-code">Q</span>
+        Santé et social
+      </a>
+      <a class="sector-link" href="/secteur/arts-loisirs">
+        <span class="sector-link-code">R</span>
+        Arts et loisirs
+      </a>
+      <a class="sector-link" href="/secteur/autres-services">
+        <span class="sector-link-code">S</span>
+        Autres services
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <span class="logo-in">IN</span>
+        <span class="logo-france">FRANCE</span>
+      </div>
+      <p class="footer-sub">Simulateur d'impact territorial. Mesurez la valeur economique reelle de votre entreprise en France.</p>
+      <p class="footer-made">Donnees BdF FIBEN 2024 &middot; OCDE ICIO 2023 &middot; Eurostat HBS 2020</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Produit</div>
+      <div class="footer-links">
+        <a class="footer-link" href="/">Simulateur</a>
+        <a class="footer-link" href="/methodologie">Methodologie</a>
+        <a class="footer-link" href="/cas-usage">Cas d'usage</a>
+        <a class="footer-link" href="/contact">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Secteurs</div>
+      <div class="footer-links">
+        <a class="footer-link" href="/secteur/construction">Construction</a>
+        <a class="footer-link" href="/secteur/commerce">Commerce</a>
+        <a class="footer-link" href="/secteur/industrie-manufacturiere">Industrie</a>
+        <a class="footer-link" href="/secteur/sante">Sante</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 IN France. Tous droits reserves.</span>
+    <span>Mentions legales &middot; Politique de confidentialite</span>
+  </div>
+</footer>
+
+<script>
+/* ─── AUTOCOMPLETE ─── */
+let acTimer = null, acFocusIdx = -1, selectedSiren = null;
+const searchInput = document.getElementById('searchInput');
+const acDropdown = document.getElementById('acDropdown');
+
+searchInput.addEventListener('input', function() {{
+  clearTimeout(acTimer);
+  const q = this.value.trim();
+  selectedSiren = null;
+  document.getElementById('companyChip').classList.remove('show');
+  document.getElementById('searchIcon').className = 'hf-input-icon';
+  document.getElementById('searchIcon').textContent = '';
+
+  if (!q) {{ acDropdown.classList.remove('open'); return; }}
+  if (/^\d{{9}}$/.test(q)) {{ lookupBySiren(q); return; }}
+  if (q.length < 2) return;
+
+  acTimer = setTimeout(() => searchByName(q), 250);
+}});
+
+searchInput.addEventListener('keydown', function(e) {{
+  const items = acDropdown.querySelectorAll('.hf-ac-item');
+  if (!items.length) return;
+  if (e.key === 'ArrowDown') {{ e.preventDefault(); acFocusIdx = Math.min(acFocusIdx + 1, items.length - 1); updateFocus(items); }}
+  else if (e.key === 'ArrowUp') {{ e.preventDefault(); acFocusIdx = Math.max(acFocusIdx - 1, 0); updateFocus(items); }}
+  else if (e.key === 'Enter' && acFocusIdx >= 0) {{ e.preventDefault(); items[acFocusIdx].click(); }}
+  else if (e.key === 'Escape') {{ acDropdown.classList.remove('open'); acFocusIdx = -1; }}
+}});
+
+function updateFocus(items) {{
+  items.forEach((el, i) => el.classList.toggle('focused', i === acFocusIdx));
+}}
+
+async function searchByName(q) {{
+  const icon = document.getElementById('searchIcon');
+  icon.className = 'hf-input-icon spin'; icon.textContent = '...';
+  try {{
+    const r = await fetch('https://recherche-entreprises.api.gouv.fr/search?q=' + encodeURIComponent(q) + '&per_page=6');
+    const d = await r.json();
+    icon.className = 'hf-input-icon'; icon.textContent = '';
+    renderAC(d.results || []);
+  }} catch(e) {{ icon.className = 'hf-input-icon err'; icon.textContent = '!'; }}
+}}
+
+async function lookupBySiren(siren) {{
+  const icon = document.getElementById('searchIcon');
+  icon.className = 'hf-input-icon spin'; icon.textContent = '...';
+  try {{
+    const r = await fetch('https://recherche-entreprises.api.gouv.fr/search?q=' + siren + '&per_page=1');
+    const d = await r.json();
+    if (d.results && d.results.length) {{ pickCompany(d.results[0]); }}
+    else {{ icon.className = 'hf-input-icon err'; icon.textContent = '?'; }}
+  }} catch(e) {{ icon.className = 'hf-input-icon err'; icon.textContent = '!'; }}
+}}
+
+function renderAC(results) {{
+  acFocusIdx = -1;
+  if (!results.length) {{
+    acDropdown.innerHTML = '<div class="hf-ac-empty">Aucun resultat</div>';
+    acDropdown.classList.add('open');
+    return;
+  }}
+  acDropdown.innerHTML = results.map((r, i) => {{
+    const name = r.nom_complet || r.nom_raison_sociale || '';
+    const siren = r.siren || '';
+    const naf = r.activite_principale || '';
+    const ville = r.siege && r.siege.libelle_commune ? r.siege.libelle_commune : '';
+    return '<div class="hf-ac-item" data-idx="' + i + '" onclick="pickCompany(acResults[' + i + '])">' +
+      '<div class="hf-ac-name">' + name + '</div>' +
+      '<div class="hf-ac-meta"><span>' + siren + '</span><span>' + naf + '</span><span>' + ville + '</span></div></div>';
+  }}).join('');
+  acDropdown.classList.add('open');
+  window.acResults = results;
+}}
+
+function pickCompany(company) {{
+  const name = company.nom_complet || company.nom_raison_sociale || '';
+  const siren = company.siren || '';
+  const naf = company.activite_principale || '';
+  const section = naf ? naf.charAt(0) : '';
+
+  selectedSiren = siren;
+  searchInput.value = name;
+  acDropdown.classList.remove('open');
+
+  const icon = document.getElementById('searchIcon');
+  icon.className = 'hf-input-icon ok'; icon.textContent = '\u2713';
+
+  const chip = document.getElementById('companyChip');
+  document.getElementById('chipName').textContent = name;
+  document.getElementById('chipNaf').textContent = naf + ' \u2014 ' + section;
+  chip.classList.add('show');
+}}
+
+document.addEventListener('click', function(e) {{
+  if (!e.target.closest('.hf-input-wrap')) acDropdown.classList.remove('open');
+}});
+
+/* CA formatter */
+const caInput = document.getElementById('caInput');
+caInput.addEventListener('input', function() {{
+  let v = this.value.replace(/[^\d]/g, '');
+  if (v) this.value = parseInt(v).toLocaleString('fr-FR');
+}});
+
+/* Submit → redirect to homepage with params */
+function goSimulate() {{
+  const siren = selectedSiren;
+  const ca = caInput.value.replace(/[\s\u00A0\u202F,]/g, '');
+  const email = document.getElementById('emailInput').value.trim();
+  const alert = document.getElementById('heroAlert');
+  const alertText = document.getElementById('alertText');
+
+  if (!siren) {{
+    alert.classList.add('show');
+    alertText.textContent = 'Veuillez selectionner une entreprise dans la liste.';
+    return;
+  }}
+  if (!ca || parseInt(ca) <= 0) {{
+    alert.classList.add('show');
+    alertText.textContent = 'Veuillez saisir un chiffre d\'affaires valide.';
+    return;
+  }}
+
+  alert.classList.remove('show');
+  let url = '/?siren=' + encodeURIComponent(siren) + '&ca=' + encodeURIComponent(ca);
+  if (email) url += '&email=' + encodeURIComponent(email);
+  url += '&auto=1';
+  window.location.href = url;
+}}
+</script>
+
+</body>
+</html>
