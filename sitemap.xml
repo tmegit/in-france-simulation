@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://simulateur.in-france.fr/</loc><priority>1.0</priority></url>
+  <url><loc>https://simulateur.in-france.fr/impact</loc><priority>0.9</priority></url>
+  <url><loc>https://simulateur.in-france.fr/methodologie</loc><priority>0.8</priority></url>
+  <url><loc>https://simulateur.in-france.fr/a-propos</loc><priority>0.7</priority></url>
+  <url><loc>https://simulateur.in-france.fr/contact</loc><priority>0.7</priority></url>
+  <url><loc>https://simulateur.in-france.fr/cas-usage</loc><priority>0.8</priority></url>
+  <url><loc>https://simulateur.in-france.fr/cas-usage/amazon</loc><priority>0.7</priority></url>
+  <url><loc>https://simulateur.in-france.fr/cas-usage/groupama</loc><priority>0.7</priority></url>
+  <url><loc>https://simulateur.in-france.fr/cas-usage/24h-du-mans</loc><priority>0.7</priority></url>
+  <url><loc>https://simulateur.in-france.fr/cas-usage/carbone-4</loc><priority>0.7</priority></url>
+  <url><loc>https://simulateur.in-france.fr/cas-usage/afjel</loc><priority>0.7</priority></url>
+  <url><loc>https://simulateur.in-france.fr/cas-usage/ministere-interieur</loc><priority>0.7</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/agriculture</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/industries-extractives</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/industrie-manufacturiere</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/energie</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/eau-dechets</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/construction</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/commerce</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/transports</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/hebergement-restauration</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/information-communication</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/finance-assurance</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/immobilier</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/services-specialises</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/services-administratifs</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/administration-publique</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/enseignement</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/sante</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/arts-loisirs</loc><priority>0.6</priority></url>
+  <url><loc>https://simulateur.in-france.fr/secteur/autres-services</loc><priority>0.6</priority></url>
+</urlset>

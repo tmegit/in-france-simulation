@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prendre rendez-vous — IN France</title>
+<meta name="description" content="Réservez une démonstration d'IN France. Mesurez, visualisez et valorisez vos effets économiques, sociaux et fiscaux grâce à des outils fiables et accessibles.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Prendre rendez-vous | IN France">
+<meta property="og:description" content="Réservez une démonstration d'IN France pour mesurer et valoriser votre impact territorial.">
+<meta property="og:image" content="https://simulateur.in-france.fr/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://simulateur.in-france.fr/contact">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="IN France">
+<link rel="canonical" href="https://simulateur.in-france.fr/contact">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--fg:#0d1b2a;--muted:#f3f5f9;--muted-fg:#64748b;--border:#dde3ee;--radius:6px;--fr-blue:#002395;--fr-red:#ED2939;--green:#16a34a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:'Geist',-apple-system,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.site-header{border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;padding:0 32px;gap:24px;position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);z-index:100}
+.logo{display:flex;align-items:baseline;gap:5px;text-decoration:none}
+.logo-in{font-size:16px;font-weight:700;letter-spacing:-.4px;color:var(--fr-blue)}
+.logo-france{font-size:16px;font-weight:700;letter-spacing:-.4px;color:var(--fr-red)}
+.header-sep{width:1px;height:18px;background:var(--border)}
+.site-nav{display:flex;gap:2px}
+.nav-link{padding:4px 10px;font-size:13px;color:var(--muted-fg);border-radius:4px;text-decoration:none;transition:all .12s}
+.nav-link:hover,.nav-link.active{background:var(--muted);color:var(--fg);font-weight:500}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--muted-fg);font-family:'Geist Mono',monospace}
+.chip-dot{width:5px;height:5px;border-radius:50%;background:var(--green)}
+
+/* Page layout */
+.page-wrap{min-height:calc(100vh - 52px);display:grid;grid-template-columns:1fr 1fr}
+
+/* Left — content */
+.page-left{padding:64px 56px;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
+.page-left-inner{max-width:460px}
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:16px;display:flex;align-items:center;gap:7px}
+.eyebrow-bar{width:16px;height:1px;background:var(--border)}
+.page-left h1{font-size:clamp(24px,3vw,36px);font-weight:700;letter-spacing:-.8px;line-height:1.15;margin-bottom:14px}
+.page-left h1 em{font-style:normal;background:linear-gradient(120deg,var(--fr-blue) 0%,var(--fr-red) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-left-sub{font-size:15px;color:var(--muted-fg);line-height:1.7;margin-bottom:32px}
+
+/* Benefits */
+.benefits{display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
+.benefit{display:flex;align-items:flex-start;gap:12px}
+.benefit-icon{width:28px;height:28px;border-radius:50%;background:#eef1ff;display:grid;place-items:center;flex-shrink:0;margin-top:1px}
+.benefit-icon svg{width:13px;height:13px;color:var(--fr-blue)}
+.benefit-text strong{font-size:13px;font-weight:600;display:block;margin-bottom:1px}
+.benefit-text span{font-size:12px;color:var(--muted-fg)}
+
+/* Clients */
+.clients-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-fg);margin-bottom:10px}
+.clients-chips{display:flex;flex-wrap:wrap;gap:6px}
+.c-chip{padding:3px 10px;border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--muted-fg);background:var(--muted)}
+
+/* Right — form embed / redirect */
+.page-right{background:var(--muted);display:grid;place-items:center;padding:48px 40px}
+.form-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:32px;width:100%;max-width:440px}
+.form-card-title{font-size:17px;font-weight:700;letter-spacing:-.3px;margin-bottom:6px}
+.form-card-sub{font-size:13px;color:var(--muted-fg);margin-bottom:24px;line-height:1.55}
+.form-group{margin-bottom:14px}
+.form-label{font-size:12px;font-weight:500;color:var(--fg);margin-bottom:5px;display:block}
+.form-input,.form-select,.form-textarea{width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:var(--radius);font-family:'Geist',sans-serif;font-size:13px;color:var(--fg);background:#fff;transition:border-color .15s,box-shadow .15s;outline:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--fr-blue);box-shadow:0 0 0 3px rgba(0,35,149,.06)}
+.form-textarea{min-height:80px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn-submit{width:100%;height:40px;background:var(--fr-blue);color:#fff;border:none;border-radius:var(--radius);font-family:'Geist',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s,box-shadow .15s;margin-top:8px}
+.btn-submit:hover{background:#001c7a;box-shadow:0 2px 12px rgba(0,35,149,.25)}
+.form-note{font-size:11px;color:var(--muted-fg);text-align:center;margin-top:12px;line-height:1.5}
+.form-success{display:none;text-align:center;padding:24px 0}
+.form-success-icon{font-size:40px;margin-bottom:12px}
+.form-success-title{font-size:16px;font-weight:700;margin-bottom:6px}
+.form-success-sub{font-size:13px;color:var(--muted-fg)}
+
+/* Footer */
+.site-footer{border-top:1px solid var(--border);padding:32px 32px}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-logo{display:flex;align-items:baseline;gap:5px}
+.footer-links-row{display:flex;gap:20px;flex-wrap:wrap}
+.footer-link{font-size:12px;color:var(--muted-fg);text-decoration:none}
+.footer-link:hover{color:var(--fg)}
+.footer-copy{font-size:12px;color:var(--muted-fg)}
+
+@media(max-width:768px){
+  .site-header{padding:0 16px}
+  .site-nav .nav-link:not(.active){display:none}
+  .page-wrap{grid-template-columns:1fr}
+  .page-left{padding:40px 20px;border-right:none;border-bottom:1px solid var(--border)}
+  .page-right{padding:32px 20px}
+  .form-row{grid-template-columns:1fr}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:12px}
+}
+
+/* Secteurs dropdown */
+.nav-dropdown{position:relative}
+.nav-dropdown-toggle{padding:4px 10px;font-size:13px;color:var(--muted-fg);border-radius:4px;cursor:pointer;transition:all .12s;background:none;border:none;font-family:'Geist',-apple-system,sans-serif;display:inline-flex;align-items:center;gap:4px}
+.nav-dropdown-toggle:hover,.nav-dropdown.open .nav-dropdown-toggle{background:var(--muted);color:var(--fg);font-weight:500}
+.nav-dropdown-toggle svg{transition:transform .2s}
+.nav-dropdown.open .nav-dropdown-toggle svg{transform:rotate(180deg)}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:540px;background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.08);padding:12px;z-index:200}
+.nav-dropdown.open .nav-dropdown-menu{display:block}
+.nav-dropdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.nav-dropdown-item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:4px;text-decoration:none;color:var(--fg);font-size:13px;transition:background .12s}
+.nav-dropdown-item:hover{background:var(--muted)}
+.nav-dropdown-item-code{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;background:var(--muted);font-size:10px;font-weight:700;font-family:'Geist Mono',monospace;color:var(--fr-blue);flex-shrink:0}
+.nav-dropdown-backdrop{display:none;position:fixed;inset:0;z-index:150}
+.nav-dropdown.open .nav-dropdown-backdrop{display:block}
+
+@media(max-width:768px){
+  .nav-dropdown-menu{width:calc(100vw - 32px);left:auto;right:-60px;transform:none}
+  .nav-dropdown-grid{grid-template-columns:1fr}
+}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/"><span class="logo-in">IN</span><span class="logo-france">France</span></a>
+  <div class="header-sep"></div>
+  <nav class="site-nav">
+    <a class="nav-link" href="/">Simulateur</a>
+    <a class="nav-link" href="/impact">Rapport d'impact</a>
+    <div class="nav-dropdown" id="secDropdown">
+      <div class="nav-dropdown-backdrop" onclick="document.getElementById('secDropdown').classList.remove('open')"></div>
+      <button class="nav-dropdown-toggle" onclick="this.parentElement.classList.toggle('open')">
+        Secteurs
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-grid">
+          <a class="nav-dropdown-item" href="/secteur/agriculture"><span class="nav-dropdown-item-code">A</span>Agriculture</a>
+          <a class="nav-dropdown-item" href="/secteur/industries-extractives"><span class="nav-dropdown-item-code">B</span>Ind. extractives</a>
+          <a class="nav-dropdown-item" href="/secteur/industrie-manufacturiere"><span class="nav-dropdown-item-code">C</span>Industrie manuf.</a>
+          <a class="nav-dropdown-item" href="/secteur/energie"><span class="nav-dropdown-item-code">D</span>Energie</a>
+          <a class="nav-dropdown-item" href="/secteur/eau-dechets"><span class="nav-dropdown-item-code">E</span>Eau et dechets</a>
+          <a class="nav-dropdown-item" href="/secteur/construction"><span class="nav-dropdown-item-code">F</span>Construction</a>
+          <a class="nav-dropdown-item" href="/secteur/commerce"><span class="nav-dropdown-item-code">G</span>Commerce</a>
+          <a class="nav-dropdown-item" href="/secteur/transports"><span class="nav-dropdown-item-code">H</span>Transports</a>
+          <a class="nav-dropdown-item" href="/secteur/hebergement-restauration"><span class="nav-dropdown-item-code">I</span>Hebergement</a>
+          <a class="nav-dropdown-item" href="/secteur/information-communication"><span class="nav-dropdown-item-code">J</span>Info. et comm.</a>
+          <a class="nav-dropdown-item" href="/secteur/finance-assurance"><span class="nav-dropdown-item-code">K</span>Finance</a>
+          <a class="nav-dropdown-item" href="/secteur/immobilier"><span class="nav-dropdown-item-code">L</span>Immobilier</a>
+          <a class="nav-dropdown-item" href="/secteur/services-specialises"><span class="nav-dropdown-item-code">M</span>Serv. specialises</a>
+          <a class="nav-dropdown-item" href="/secteur/services-administratifs"><span class="nav-dropdown-item-code">N</span>Serv. administratifs</a>
+          <a class="nav-dropdown-item" href="/secteur/administration-publique"><span class="nav-dropdown-item-code">O</span>Admin. publique</a>
+          <a class="nav-dropdown-item" href="/secteur/enseignement"><span class="nav-dropdown-item-code">P</span>Enseignement</a>
+          <a class="nav-dropdown-item" href="/secteur/sante"><span class="nav-dropdown-item-code">Q</span>Sante et social</a>
+          <a class="nav-dropdown-item" href="/secteur/arts-loisirs"><span class="nav-dropdown-item-code">R</span>Arts et loisirs</a>
+          <a class="nav-dropdown-item" href="/secteur/autres-services"><span class="nav-dropdown-item-code">S</span>Autres services</a>
+        </div>
+      </div>
+    </div>
+    <a class="nav-link" href="/cas-usage">Cas d'usage</a>
+    <a class="nav-link" href="/methodologie">Methodologie</a>
+    <a class="nav-link" href="/a-propos">A propos</a>
+  </nav>
+  <div class="header-right">
+    <div class="chip"><div class="chip-dot"></div>API live</div>
+    <a class="btn-demo" href="/contact">Prendre rendez-vous →</a>
+  </div>
+</header>
+
+<div class="page-wrap">
+
+  <!-- Left -->
+  <div class="page-left">
+    <div class="page-left-inner">
+      <div class="eyebrow"><div class="eyebrow-bar"></div>IN France · Groupe Société.com</div>
+      <h1>Réserver une <em>démonstration</em></h1>
+      <p class="page-left-sub">IN France vous aide à mesurer, visualiser et valoriser vos effets économiques, sociaux et fiscaux, grâce à des outils fiables et accessibles.</p>
+
+      <div class="benefits">
+        <div class="benefit">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="benefit-text">
+            <strong>Rapport livré en 48h</strong>
+            <span>Premier livrable après réception de vos données comptables</span>
+          </div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="benefit-text">
+            <strong>30+ indicateurs stratégiques</strong>
+            <span>Emplois, VA, taxes, multiplicateur — par territoire et secteur</span>
+          </div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="benefit-text">
+            <strong>Données souveraines</strong>
+            <span>Hébergement en France · SecNumCloud · Jamais partagées</span>
+          </div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="benefit-text">
+            <strong>Plus de 90 clients satisfaits</strong>
+            <span>Entreprises, fédérations, institutions publiques</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="clients-label">Ils nous font déjà confiance</div>
+      <div class="clients-chips">
+        <span class="c-chip">Amazon</span>
+        <span class="c-chip">Groupama</span>
+        <span class="c-chip">24h du Mans</span>
+        <span class="c-chip">Carbone 4</span>
+        <span class="c-chip">AFJEL</span>
+        <span class="c-chip">Ministère de l'Intérieur</span>
+        <span class="c-chip">France Invest</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right — form (redirige vers in-france.fr/demo pour la vraie soumission) -->
+  <div class="page-right">
+    <div class="form-card">
+      <div id="formWrap">
+        <div class="form-card-title">Parlons de votre projet</div>
+        <div class="form-card-sub">Remplissez ce formulaire ou écrivez directement à <a href="mailto:contact@in-france.fr" style="color:var(--fr-blue);font-weight:500">contact@in-france.fr</a></div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Prénom *</label>
+            <input class="form-input" type="text" placeholder="Marie">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nom *</label>
+            <input class="form-input" type="text" placeholder="Dupont">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Entreprise *</label>
+          <input class="form-input" type="text" placeholder="Votre organisation">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Fonction *</label>
+          <input class="form-input" type="text" placeholder="Directeur RSE">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email *</label>
+          <input class="form-input" type="email" placeholder="marie@entreprise.fr">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Produit intéressé</label>
+          <select class="form-select">
+            <option value="">Sélectionner</option>
+            <option>Rapport d'impact</option>
+            <option>Observatoire</option>
+            <option>API / Simulateur</option>
+            <option>Conseil</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Votre besoin</label>
+          <textarea class="form-textarea" placeholder="Décrivez votre projet en quelques mots…"></textarea>
+        </div>
+
+        <button class="btn-submit" onclick="handleSubmit()">Envoyer la demande →</button>
+        <div class="form-note">🔒 Données traitées de façon confidentielle · Hébergement France</div>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✅</div>
+        <div class="form-success-title">Demande envoyée !</div>
+        <div class="form-success-sub">Nous vous recontactons sous 24h ouvrées.<br>En attendant, <a href="cas-usage.html" style="color:var(--fr-blue);font-weight:500">consultez nos cas d'usage</a>.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo"><span class="logo-in">IN</span><span class="logo-france">France</span></div>
+    <div class="footer-links-row">
+      <a class="footer-link" href="index.html">Simulateur</a>
+      <a class="footer-link" href="impact.html">Rapport d'impact</a>
+      <a class="footer-link" href="cas-usage.html">Cas d'usage</a>
+      <a class="footer-link" href="methodologie.html">Méthodologie</a>
+      <a class="footer-link" href="https://www.in-france.fr/mentions-legales" target="_blank">Mentions légales</a>
+    </div>
+    <div class="footer-copy">© IN France 2025 · Fabriqué en 🇫🇷</div>
+  </div>
+</footer>
+
+<script>
+function handleSubmit() {
+  // Redirige vers le vrai formulaire in-france.fr/demo
+  // À remplacer par une vraie soumission API si souhaité
+  const prenom = document.querySelector('input[placeholder="Marie"]').value;
+  const email  = document.querySelector('input[type="email"]').value;
+  if (!prenom || !email) {
+    alert('Merci de renseigner au minimum votre prénom et votre email.');
+    return;
+  }
+  document.getElementById('formWrap').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+  // Optionnel : window.open('https://www.in-france.fr/demo', '_blank');
+}
+</script>
+
+</body>
+</html>

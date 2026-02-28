@@ -523,6 +523,11 @@ def generate_page(sector):
 {json.dumps(faq_schema, ensure_ascii=False, indent=2)}
 </script>
 
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -750,11 +755,11 @@ body{{background:var(--bg);color:var(--fg);font-family:'Geist',-apple-system,san
       </div>
     </div>
     <a class="nav-link" href="/methodologie">Methodologie</a>
-    <a class="nav-link" href="https://www.in-france.fr/a-propos" target="_blank">A propos</a>
+    <a class="nav-link" href="/a-propos">A propos</a>
   </nav>
   <div class="header-right">
     <div class="chip"><div class="chip-dot"></div>API live</div>
-    <a class="btn-demo" href="https://www.in-france.fr/demo" target="_blank">Prendre rendez-vous &rarr;</a>
+    <a class="btn-demo" href="/contact">Prendre rendez-vous &rarr;</a>
   </div>
 </header>
 
@@ -944,7 +949,7 @@ body{{background:var(--bg);color:var(--fg);font-family:'Geist',-apple-system,san
     <h2>Mesurez l'impact de votre entreprise</h2>
     <p>Calculez en 30 secondes les emplois, la valeur ajoutee et les taxes generees par votre entreprise dans le secteur {sector["short"].lower()}.</p>
     <a class="cta-link" href="/">Lancer la simulation &rarr;</a>
-    <a class="cta-secondary" href="https://www.in-france.fr/demo" target="_blank">Prendre rendez-vous</a>
+    <a class="cta-secondary" href="/contact">Prendre rendez-vous</a>
   </div>
 </section>
 

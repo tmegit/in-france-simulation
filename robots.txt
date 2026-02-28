@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://simulateur.in-france.fr/sitemap.xml

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapport d'Impact Territorial — IN FRANCE</title>
+<meta name="description" content="Mesurez l'impact territorial de votre entreprise grâce à l'IA. Retombées économiques, sociales et fiscales partout en France. Rapport livré en 48h.">
+<meta property="og:title" content="Rapport d'Impact Territorial — IN France">
+<meta property="og:description" content="Visualisez vos retombées économiques, sociales et fiscales partout en France. Les indicateurs pour convaincre, influencer et décider.">
+<meta property="og:image" content="https://simulateur.in-france.fr/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="canonical" href="https://simulateur.in-france.fr/impact">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--fg:#0d1b2a;--muted:#f3f5f9;--muted-fg:#64748b;--border:#dde3ee;--radius:6px;--fr-blue:#002395;--fr-red:#ED2939;--green:#16a34a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:'Geist',-apple-system,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.site-header{border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;padding:0 32px;gap:24px;position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);z-index:100}
+.logo{display:flex;align-items:baseline;gap:5px;text-decoration:none}
+.logo-in{font-size:16px;font-weight:700;letter-spacing:-.4px;color:var(--fr-blue)}
+.logo-france{font-size:16px;font-weight:700;letter-spacing:-.4px;color:var(--fr-red)}
+.header-sep{width:1px;height:18px;background:var(--border)}
+.site-nav{display:flex;gap:2px}
+.nav-link{padding:4px 10px;font-size:13px;color:var(--muted-fg);border-radius:4px;text-decoration:none;transition:all .12s}
+.nav-link:hover,.nav-link.active{background:var(--muted);color:var(--fg);font-weight:500}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--muted-fg);font-family:'Geist Mono',monospace}
+.chip-dot{width:5px;height:5px;border-radius:50%;background:var(--green)}
+.btn-demo{display:inline-flex;align-items:center;height:32px;padding:0 14px;background:var(--fr-blue);color:#fff;border-radius:var(--radius);font-family:'Geist',sans-serif;font-size:13px;font-weight:500;text-decoration:none;transition:background .15s;white-space:nowrap}
+.btn-demo:hover{background:#001c7a}
+
+/* Hero */
+.hero{background:var(--fr-blue);color:#fff;padding:72px 32px 68px;position:relative;overflow:hidden}
+.tricolor-top{display:flex;height:3px}
+.tricolor-top div:nth-child(1){flex:1;background:rgba(255,255,255,.25)}
+.tricolor-top div:nth-child(2){flex:1;background:rgba(255,255,255,.55)}
+.tricolor-top div:nth-child(3){flex:1;background:var(--fr-red)}
+.hero-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:52px 52px;pointer-events:none}
+.hero-glow{position:absolute;bottom:-20%;right:-5%;width:500px;height:500px;background:radial-gradient(ellipse,rgba(237,41,57,.18) 0%,transparent 68%);pointer-events:none}
+.hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:1}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:16px;display:flex;align-items:center;gap:7px}
+.hero-eyebrow-bar{width:16px;height:1px;background:rgba(255,255,255,.25)}
+.hero h1{font-size:clamp(26px,4vw,46px);font-weight:700;letter-spacing:-1.2px;line-height:1.1;margin-bottom:18px;max-width:680px}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.62);font-weight:300;max-width:560px;line-height:1.65;margin-bottom:28px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;height:40px;padding:0 20px;background:var(--fr-red);color:#fff;border-radius:var(--radius);font-size:13px;font-weight:600;text-decoration:none;transition:background .15s,box-shadow .15s}
+.btn-primary:hover{background:#d42233;box-shadow:0 4px 16px rgba(237,41,57,.4)}
+.btn-secondary{display:inline-flex;align-items:center;height:40px;padding:0 20px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:var(--radius);font-size:13px;font-weight:500;text-decoration:none;transition:background .15s}
+.btn-secondary:hover{background:rgba(255,255,255,.18)}
+
+/* Clients */
+.clients-bar{border-bottom:1px solid var(--border);padding:16px 32px;background:var(--muted)}
+.clients-bar-inner{max-width:920px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.clients-label{font-size:11px;font-weight:500;color:var(--muted-fg);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.clients-chips{display:flex;gap:8px;flex-wrap:wrap}
+.client-chip{padding:3px 10px;border:1px solid var(--border);border-radius:20px;font-size:12px;color:var(--muted-fg);background:#fff}
+
+/* Content */
+.content{max-width:920px;margin:0 auto;padding:56px 32px 80px}
+
+/* Section */
+.section-eyebrow{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.section-eyebrow-dot{width:4px;height:4px;border-radius:50%;background:var(--fr-blue)}
+.section-title{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.5px;line-height:1.2;margin-bottom:16px}
+.section-sub{font-size:15px;color:var(--muted-fg);max-width:560px;line-height:1.65;margin-bottom:32px}
+
+/* Features */
+.features{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:56px}
+.feature{background:var(--bg);padding:24px;display:grid;grid-template-columns:1fr 2fr;gap:24px;align-items:start}
+.feature-label{font-size:11px;font-weight:600;color:var(--fr-blue);font-family:'Geist Mono',monospace;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.feature-title{font-size:15px;font-weight:600;margin-bottom:6px}
+.feature-desc{font-size:13px;color:var(--muted-fg);line-height:1.65}
+.feature-tag{display:inline-flex;padding:2px 8px;background:var(--muted);border:1px solid var(--border);border-radius:3px;font-size:11px;font-family:'Geist Mono',monospace;color:var(--muted-fg);margin-top:8px}
+
+/* Perf tags */
+.perf-cloud{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 40px}
+.perf-tag{padding:6px 14px;border-radius:20px;font-size:13px;font-weight:500;cursor:default;transition:all .15s}
+.perf-tag-blue{background:#eef1ff;color:var(--fr-blue);border:1px solid #c5cffa}
+.perf-tag-red{background:#fff0f1;color:var(--fr-red);border:1px solid #fcc}
+.perf-tag-grey{background:var(--muted);color:var(--fg);border:1px solid var(--border)}
+
+/* KPIs */
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:40px 0}
+.kpi-item{background:var(--bg);padding:20px}
+.kpi-num{font-size:28px;font-weight:700;letter-spacing:-.8px;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.kpi-label{font-size:12px;color:var(--muted-fg);line-height:1.4}
+
+/* Testimonials */
+.testimonials{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:40px 0}
+.testimonial{border:1px solid var(--border);border-radius:var(--radius);padding:20px;background:var(--bg)}
+.testimonial-text{font-size:13px;color:var(--muted-fg);line-height:1.65;margin-bottom:14px;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:10px}
+.testimonial-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--fr-blue) 0%,#4060b8 100%);display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.testimonial-name{font-size:13px;font-weight:600}
+.testimonial-role{font-size:12px;color:var(--muted-fg)}
+
+/* FAQ */
+.faq{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:48px}
+.faq-item{border-bottom:1px solid var(--border);padding:18px 20px}
+.faq-item:last-child{border-bottom:none}
+.faq-q{font-size:14px;font-weight:600;margin-bottom:8px;cursor:pointer}
+.faq-a{font-size:13px;color:var(--muted-fg);line-height:1.65}
+
+/* CTA */
+.page-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px 32px;background:linear-gradient(135deg,#001c7a 0%,var(--fr-blue) 70%);border-radius:10px;color:#fff;flex-wrap:wrap;margin-top:56px}
+.page-cta-title{font-size:18px;font-weight:700;letter-spacing:-.3px;margin-bottom:4px}
+.page-cta-sub{font-size:13px;color:rgba(255,255,255,.55)}
+.page-cta-btn{display:inline-flex;align-items:center;height:40px;padding:0 20px;background:var(--fr-red);color:#fff;border-radius:var(--radius);font-size:13px;font-weight:600;text-decoration:none;flex-shrink:0;transition:background .15s,box-shadow .15s}
+.page-cta-btn:hover{background:#d42233;box-shadow:0 4px 20px rgba(237,41,57,.4)}
+
+/* Footer */
+.site-footer{border-top:1px solid var(--border);padding:40px 32px;margin-top:0}
+.footer-inner{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}
+.footer-logo{display:flex;align-items:baseline;gap:5px;margin-bottom:8px}
+.footer-sub{font-size:12px;color:var(--muted-fg);line-height:1.55;max-width:220px}
+.footer-made{margin-top:10px;font-size:11px;color:var(--muted-fg)}
+.footer-col-title{font-size:11px;font-weight:600;color:var(--fg);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.footer-links{display:flex;flex-direction:column;gap:7px}
+.footer-link{font-size:13px;color:var(--muted-fg);text-decoration:none;transition:color .12s}
+.footer-link:hover{color:var(--fg)}
+.footer-bottom{max-width:920px;margin:24px auto 0;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;color:var(--muted-fg)}
+.divider{height:1px;background:var(--border);margin:56px 0}
+
+@media(max-width:768px){
+  .site-header{padding:0 16px}
+  .site-nav .nav-link:not(.active){display:none}
+  .hero{padding:48px 16px 44px}
+  .content{padding:36px 16px 64px}
+  .feature{grid-template-columns:1fr}
+  .kpi-strip{grid-template-columns:1fr 1fr}
+  .testimonials{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr}
+  .page-cta{flex-direction:column;padding:24px 20px}
+  .footer-bottom{flex-direction:column;gap:6px}
+}
+
+/* Secteurs dropdown */
+.nav-dropdown{position:relative}
+.nav-dropdown-toggle{padding:4px 10px;font-size:13px;color:var(--muted-fg);border-radius:4px;cursor:pointer;transition:all .12s;background:none;border:none;font-family:'Geist',-apple-system,sans-serif;display:inline-flex;align-items:center;gap:4px}
+.nav-dropdown-toggle:hover,.nav-dropdown.open .nav-dropdown-toggle{background:var(--muted);color:var(--fg);font-weight:500}
+.nav-dropdown-toggle svg{transition:transform .2s}
+.nav-dropdown.open .nav-dropdown-toggle svg{transform:rotate(180deg)}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:540px;background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.08);padding:12px;z-index:200}
+.nav-dropdown.open .nav-dropdown-menu{display:block}
+.nav-dropdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.nav-dropdown-item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:4px;text-decoration:none;color:var(--fg);font-size:13px;transition:background .12s}
+.nav-dropdown-item:hover{background:var(--muted)}
+.nav-dropdown-item-code{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;background:var(--muted);font-size:10px;font-weight:700;font-family:'Geist Mono',monospace;color:var(--fr-blue);flex-shrink:0}
+.nav-dropdown-backdrop{display:none;position:fixed;inset:0;z-index:150}
+.nav-dropdown.open .nav-dropdown-backdrop{display:block}
+
+@media(max-width:768px){
+  .nav-dropdown-menu{width:calc(100vw - 32px);left:auto;right:-60px;transform:none}
+  .nav-dropdown-grid{grid-template-columns:1fr}
+}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/"><span class="logo-in">IN</span><span class="logo-france">France</span></a>
+  <div class="header-sep"></div>
+  <nav class="site-nav">
+    <a class="nav-link" href="/">Simulateur</a>
+    <a class="nav-link active" href="/impact">Rapport d'impact</a>
+    <div class="nav-dropdown" id="secDropdown">
+      <div class="nav-dropdown-backdrop" onclick="document.getElementById('secDropdown').classList.remove('open')"></div>
+      <button class="nav-dropdown-toggle" onclick="this.parentElement.classList.toggle('open')">
+        Secteurs
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-grid">
+          <a class="nav-dropdown-item" href="/secteur/agriculture"><span class="nav-dropdown-item-code">A</span>Agriculture</a>
+          <a class="nav-dropdown-item" href="/secteur/industries-extractives"><span class="nav-dropdown-item-code">B</span>Ind. extractives</a>
+          <a class="nav-dropdown-item" href="/secteur/industrie-manufacturiere"><span class="nav-dropdown-item-code">C</span>Industrie manuf.</a>
+          <a class="nav-dropdown-item" href="/secteur/energie"><span class="nav-dropdown-item-code">D</span>Energie</a>
+          <a class="nav-dropdown-item" href="/secteur/eau-dechets"><span class="nav-dropdown-item-code">E</span>Eau et dechets</a>
+          <a class="nav-dropdown-item" href="/secteur/construction"><span class="nav-dropdown-item-code">F</span>Construction</a>
+          <a class="nav-dropdown-item" href="/secteur/commerce"><span class="nav-dropdown-item-code">G</span>Commerce</a>
+          <a class="nav-dropdown-item" href="/secteur/transports"><span class="nav-dropdown-item-code">H</span>Transports</a>
+          <a class="nav-dropdown-item" href="/secteur/hebergement-restauration"><span class="nav-dropdown-item-code">I</span>Hebergement</a>
+          <a class="nav-dropdown-item" href="/secteur/information-communication"><span class="nav-dropdown-item-code">J</span>Info. et comm.</a>
+          <a class="nav-dropdown-item" href="/secteur/finance-assurance"><span class="nav-dropdown-item-code">K</span>Finance</a>
+          <a class="nav-dropdown-item" href="/secteur/immobilier"><span class="nav-dropdown-item-code">L</span>Immobilier</a>
+          <a class="nav-dropdown-item" href="/secteur/services-specialises"><span class="nav-dropdown-item-code">M</span>Serv. specialises</a>
+          <a class="nav-dropdown-item" href="/secteur/services-administratifs"><span class="nav-dropdown-item-code">N</span>Serv. administratifs</a>
+          <a class="nav-dropdown-item" href="/secteur/administration-publique"><span class="nav-dropdown-item-code">O</span>Admin. publique</a>
+          <a class="nav-dropdown-item" href="/secteur/enseignement"><span class="nav-dropdown-item-code">P</span>Enseignement</a>
+          <a class="nav-dropdown-item" href="/secteur/sante"><span class="nav-dropdown-item-code">Q</span>Sante et social</a>
+          <a class="nav-dropdown-item" href="/secteur/arts-loisirs"><span class="nav-dropdown-item-code">R</span>Arts et loisirs</a>
+          <a class="nav-dropdown-item" href="/secteur/autres-services"><span class="nav-dropdown-item-code">S</span>Autres services</a>
+        </div>
+      </div>
+    </div>
+    <a class="nav-link" href="/cas-usage">Cas d'usage</a>
+    <a class="nav-link" href="/methodologie">Methodologie</a>
+    <a class="nav-link" href="/a-propos">A propos</a>
+  </nav>
+  <div class="header-right">
+    <div class="chip"><div class="chip-dot"></div>API live</div>
+    <a class="btn-demo" href="/contact">Prendre rendez-vous →</a>
+  </div>
+</header>
+
+<!-- Hero bleu -->
+<section class="hero">
+  <div class="tricolor-top"><div></div><div></div><div></div></div>
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><div class="hero-eyebrow-bar"></div>Le Rapport d'Impact Territorial</div>
+    <h1>Mesurez l'impact territorial grâce à l'IA dans un rapport pensé pour les décideurs.</h1>
+    <p class="hero-sub">Visualisez vos retombées économiques, sociales et fiscales partout en France. Les indicateurs pour convaincre, influencer et décider en toute confiance.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://www.in-france.fr/demo" target="_blank">Demander une démo →</a>
+      <a class="btn-secondary" href="cas-usage.html">Voir les cas d'usage</a>
+    </div>
+  </div>
+</section>
+
+<!-- Clients -->
+<div class="clients-bar">
+  <div class="clients-bar-inner">
+    <span class="clients-label">Ils nous font confiance</span>
+    <div class="clients-chips">
+      <span class="client-chip">Amazon</span>
+      <span class="client-chip">Groupama</span>
+      <span class="client-chip">24h du Mans (ACO)</span>
+      <span class="client-chip">Carbone 4</span>
+      <span class="client-chip">AFJEL</span>
+      <span class="client-chip">Ministère de l'Intérieur</span>
+      <span class="client-chip">France Invest</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- Indicateurs -->
+  <div class="section-eyebrow"><div class="section-eyebrow-dot"></div>Nos indicateurs de référence</div>
+  <h2 class="section-title">Des outils pour mesurer, cartographier et valoriser votre impact territorial.</h2>
+  <div class="section-sub">Du calcul des effets directs à la modélisation des retombées induites, notre rapport vous offre une vision claire et territorialisée.</div>
+
+  <div class="features">
+    <div class="feature">
+      <div>
+        <div class="feature-label">Couche 1</div>
+        <div class="feature-tag">Territoire</div>
+      </div>
+      <div>
+        <div class="feature-title">Des indicateurs par territoire, pour une communication ciblée.</div>
+        <div class="feature-desc">Visualisez vos retombées économiques, sociales et fiscales à l'échelle des communes, EPCI, départements et régions.</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div>
+        <div class="feature-label">Couche 2</div>
+        <div class="feature-tag">Secteur NAF</div>
+      </div>
+      <div>
+        <div class="feature-title">Une lecture fine de votre impact par secteur d'activité (NAF).</div>
+        <div class="feature-desc">Accédez à vos indicateurs sur tous les niveaux de la NAF pour affiner vos comparaisons et valoriser votre spécificité.</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div>
+        <div class="feature-label">Couche 3</div>
+        <div class="feature-tag">Direct · Indirect · Induit</div>
+      </div>
+      <div>
+        <div class="feature-title">Des effets directs, indirects et induits mesurés avec rigueur.</div>
+        <div class="feature-desc">Notre modélisation calcule l'ensemble des impacts liés à votre activité selon la méthode "Economy as a Code".</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Performances -->
+  <div class="section-eyebrow"><div class="section-eyebrow-dot"></div>Les performances</div>
+  <h2 class="section-title">Du grand groupe à la TPE, le rapport s'adapte à chaque objectif.</h2>
+
+  <div class="perf-cloud">
+    <span class="perf-tag perf-tag-blue">Valoriser son ancrage</span>
+    <span class="perf-tag perf-tag-blue">Influence locale</span>
+    <span class="perf-tag perf-tag-red">Rapport ESG</span>
+    <span class="perf-tag perf-tag-red">Marketing institutionnel</span>
+    <span class="perf-tag perf-tag-grey">Répondre aux élus</span>
+    <span class="perf-tag perf-tag-grey">Structurer sa RSE</span>
+    <span class="perf-tag perf-tag-blue">Cartographier ses impacts</span>
+    <span class="perf-tag perf-tag-grey">Dialoguer avec les territoires</span>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-strip">
+    <div class="kpi-item">
+      <div class="kpi-num" style="color:var(--fr-blue)">48h</div>
+      <div class="kpi-label">Premier rapport personnalisé après réception des données</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num" style="color:var(--fr-blue)">30+</div>
+      <div class="kpi-label">Indicateurs stratégiques pour piloter votre impact</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num" style="color:var(--fr-red)">100%</div>
+      <div class="kpi-label">Interface web interactive, filtres par territoire et secteur</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num" style="color:var(--fg)">1</div>
+      <div class="kpi-label">Rapport PDF clair, prêt à partager avec vos parties prenantes</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Témoignages -->
+  <div class="section-eyebrow"><div class="section-eyebrow-dot"></div>Ce que les clients pensent de nous</div>
+  <h2 class="section-title">Adopté par les entreprises, les fédérations et les institutions.</h2>
+
+  <div class="testimonials">
+    <div class="testimonial">
+      <div class="testimonial-text">« Nous utilisons IN France pour mesurer l'impact territorial et la souveraineté des achats du Ministère de l'Intérieur. »</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">JF</div>
+        <div>
+          <div class="testimonial-name">Julien Fischer</div>
+          <div class="testimonial-role">Chef de section pilotage de la performance des achats<br>Ministère de l'Intérieur</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-text">« Chez France Invest, nous accédons à des données administratives et financières certifiées pour suivre en temps réel l'impact des investissements de nos membres. »</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">SP</div>
+        <div>
+          <div class="testimonial-name">Simon Ponroy</div>
+          <div class="testimonial-role">France Invest</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="divider"></div>
+  <div class="section-eyebrow"><div class="section-eyebrow-dot"></div>FAQ</div>
+  <h2 class="section-title">Des questions ? Pas d'inquiétude.</h2>
+
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q">Qu'est-ce que le Rapport d'Impact Territorial et comment fonctionne-t-il ?</div>
+      <div class="faq-a">C'est un rapport complet qui mesure les retombées économiques, sociales et fiscales de votre entreprise à l'échelle des territoires, à partir de vos données comptables.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Qui peut utiliser ce rapport ?</div>
+      <div class="faq-a">Toutes les entreprises, fédérations, collectivités ou institutions souhaitant valoriser ou comprendre leur empreinte territoriale.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Combien de temps faut-il pour obtenir un rapport ?</div>
+      <div class="faq-a">Un premier livrable est disponible sous 48h après réception des données. La version finale suit après validation.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Est-ce que mes données sont sécurisées ?</div>
+      <div class="faq-a">Oui. Vos données sont traitées de manière confidentielle, hébergées en France chez Dassault Systèmes Outscale dans un environnement SecNumCloud et jamais partagées avec des tiers.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Quelle est la méthodologie utilisée ?</div>
+      <div class="faq-a">Nous utilisons "Economy as a Code", une méthode propriétaire qui modélise les effets économiques réels d'après vos flux comptables. <a href="methodologie.html" style="color:var(--fr-blue);font-weight:500">En savoir plus sur la méthodologie →</a></div>
+    </div>
+  </div>
+
+  <div class="page-cta">
+    <div>
+      <div class="page-cta-title">Obtenir un rapport sur mesure</div>
+      <div class="page-cta-sub">Livraison en 48h · Plus de 30 indicateurs · Interface web interactive</div>
+    </div>
+    <a class="page-cta-btn" href="https://www.in-france.fr/demo" target="_blank">Demander une démo →</a>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><span class="logo-in">IN</span><span class="logo-france">France</span></div>
+      <div class="footer-sub">Rendre visible l'impact economique des entreprises dans les territoires francais.</div>
+      <div class="footer-made">Fabrique en France · Groupe Societe.com</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <div class="footer-links">
+        <a class="footer-link" href="/">Simulateur gratuit</a>
+        <a class="footer-link" href="/impact">Rapport d'impact</a>
+        <a class="footer-link" href="/cas-usage">Cas d'usage</a>
+        <a class="footer-link" href="/methodologie">Methodologie</a>
+        <a class="footer-link" href="/a-propos">A propos</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Liens utiles</div>
+      <div class="footer-links">
+        <a class="footer-link" href="/contact">Demander une demo</a>
+        <a class="footer-link" href="https://www.linkedin.com/in/tristanmeneret/" target="_blank">LinkedIn</a>
+        <a class="footer-link" href="https://www.in-france.fr/mentions-legales" target="_blank">Mentions legales</a>
+        <a class="footer-link" href="https://www.in-france.fr/politique-confidentialite" target="_blank">Confidentialite</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; IN France 2025</span>
+    <span>Heberge en France · Donnees souveraines</span>
+  </div>
+</footer>
+
+</body>
+</html>

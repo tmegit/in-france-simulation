@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFJEL — Cas d'usage IN France</title>
+<meta name="description" content="Objectiver l'impact territorial d'un secteur numérique stratégique">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AFJEL | Cas d'usage IN France">
+<meta property="og:description" content="Objectiver l'impact territorial d'un secteur numérique stratégique">
+<meta property="og:image" content="https://simulateur.in-france.fr/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://simulateur.in-france.fr/cas-usage/afjel">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="IN France">
+<link rel="canonical" href="https://simulateur.in-france.fr/cas-usage/afjel">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>/* CSS commun cas d'usage - inliné dans chaque page */
+:root{--bg:#fff;--fg:#0d1b2a;--muted:#f3f5f9;--muted-fg:#64748b;--border:#dde3ee;--radius:6px;--fr-blue:#002395;--fr-red:#ED2939;--green:#16a34a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:'Geist',-apple-system,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.site-header{border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;padding:0 32px;gap:24px;position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);z-index:100}
+.logo{display:flex;align-items:baseline;gap:5px;text-decoration:none}
+.logo-in{font-size:16px;font-weight:700;letter-spacing:-.4px;color:var(--fr-blue)}
+.logo-france{font-size:16px;font-weight:700;letter-spacing:-.4px;color:var(--fr-red)}
+.header-sep{width:1px;height:18px;background:var(--border)}
+.site-nav{display:flex;gap:2px}
+.nav-link{padding:4px 10px;font-size:13px;color:var(--muted-fg);border-radius:4px;text-decoration:none;transition:all .12s}
+.nav-link:hover,.nav-link.active{background:var(--muted);color:var(--fg);font-weight:500}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--muted-fg);font-family:'Geist Mono',monospace}
+.chip-dot{width:5px;height:5px;border-radius:50%;background:var(--green)}
+.btn-demo{display:inline-flex;align-items:center;height:32px;padding:0 14px;background:var(--fr-blue);color:#fff;border-radius:var(--radius);font-family:'Geist',sans-serif;font-size:13px;font-weight:500;text-decoration:none;transition:background .15s;white-space:nowrap}
+.btn-demo:hover{background:#001c7a}
+.breadcrumb{font-size:13px;color:var(--muted-fg);display:flex;align-items:center;gap:6px;margin-bottom:18px}
+.breadcrumb a{color:var(--muted-fg);text-decoration:none}
+.breadcrumb a:hover{color:var(--fg)}
+.breadcrumb-sep{color:var(--border)}
+.page-hero{border-bottom:1px solid var(--border);padding:52px 32px 48px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:52px 52px;opacity:.28;pointer-events:none}
+.page-hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:start}
+.page-hero h1{font-size:clamp(22px,3.5vw,34px);font-weight:700;letter-spacing:-.8px;line-height:1.15;margin-bottom:14px}
+.hero-intro{font-size:15px;color:var(--muted-fg);line-height:1.7}
+.hero-card{border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);overflow:hidden}
+.hero-card-img{height:160px;background:linear-gradient(135deg,var(--fr-blue) 0%,#1a3fa8 100%);display:grid;place-items:center;font-size:40px}
+.hero-card-body{padding:16px}
+.hero-card-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--muted-fg);margin-bottom:5px}
+.hero-card-client{font-size:16px;font-weight:700;margin-bottom:8px}
+.hero-card-tags{display:flex;flex-wrap:wrap;gap:5px}
+.hero-card-tag{padding:2px 8px;border-radius:3px;font-size:11px;font-family:'Geist Mono',monospace;border:1px solid var(--border);color:var(--muted-fg);background:var(--muted)}
+.content{max-width:920px;margin:0 auto;padding:48px 32px 80px;display:grid;grid-template-columns:1fr 280px;gap:48px;align-items:start}
+.content-main{}
+.section-block{margin-bottom:36px}
+.section-block h2{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--fr-blue);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.section-block h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.section-block p{font-size:14px;color:var(--muted-fg);line-height:1.75}
+.results-list{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.result-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--muted);border-radius:4px;font-size:13px}
+.result-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.result-dot-blue{background:var(--fr-blue)}
+.result-dot-red{background:var(--fr-red)}
+.quote-block{border-left:3px solid var(--fr-blue);padding:16px 20px;background:var(--muted);border-radius:0 var(--radius) var(--radius) 0;margin-top:28px}
+.quote-text{font-size:14px;color:var(--fg);line-height:1.7;font-style:italic;margin-bottom:10px}
+.quote-author{font-size:12px;font-weight:600;color:var(--muted-fg)}
+.download-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--muted);border:1px solid var(--border);border-radius:var(--radius);font-size:13px;color:var(--fg);text-decoration:none;font-weight:500;transition:all .15s;margin-top:20px}
+.download-btn:hover{background:var(--border);border-color:var(--muted-fg)}
+.sidebar{}
+.sidebar-card{border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;background:var(--bg)}
+.sidebar-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted-fg);margin-bottom:12px}
+.sidebar-stat{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--border)}
+.sidebar-stat:last-child{border-bottom:none}
+.sidebar-stat-label{font-size:12px;color:var(--muted-fg)}
+.sidebar-stat-val{font-size:14px;font-weight:700;font-family:'Geist Mono',monospace;color:var(--fg)}
+.sidebar-cta{background:var(--fr-blue);border-radius:var(--radius);padding:18px;color:#fff;text-align:center}
+.sidebar-cta-title{font-size:14px;font-weight:600;margin-bottom:6px}
+.sidebar-cta-sub{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:14px;line-height:1.5}
+.sidebar-cta-btn{display:inline-flex;align-items:center;justify-content:center;width:100%;height:36px;background:var(--fr-red);color:#fff;border-radius:var(--radius);font-size:13px;font-weight:600;text-decoration:none;transition:background .15s}
+.sidebar-cta-btn:hover{background:#d42233}
+.other-cases{margin-top:48px}
+.other-cases-title{font-size:14px;font-weight:600;margin-bottom:14px}
+.case-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.case-card{border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-decoration:none;color:inherit;transition:border-color .15s,box-shadow .15s;display:block;background:var(--bg)}
+.case-card:hover{border-color:var(--fr-blue);box-shadow:0 2px 12px rgba(0,35,149,.08)}
+.case-card-client{font-size:13px;font-weight:600;margin-bottom:3px}
+.case-card-desc{font-size:12px;color:var(--muted-fg);line-height:1.45}
+.site-footer{border-top:1px solid var(--border);padding:40px 32px;margin-top:0}
+.footer-inner{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}
+.footer-logo{display:flex;align-items:baseline;gap:5px;margin-bottom:8px}
+.footer-sub{font-size:12px;color:var(--muted-fg);line-height:1.55;max-width:220px}
+.footer-made{margin-top:10px;font-size:11px;color:var(--muted-fg)}
+.footer-col-title{font-size:11px;font-weight:600;color:var(--fg);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.footer-links{display:flex;flex-direction:column;gap:7px}
+.footer-link{font-size:13px;color:var(--muted-fg);text-decoration:none;transition:color .12s}
+.footer-link:hover{color:var(--fg)}
+.footer-bottom{max-width:920px;margin:24px auto 0;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;color:var(--muted-fg)}
+@media(max-width:768px){
+  .site-header{padding:0 16px}
+  .site-nav .nav-link:not(.active){display:none}
+  .page-hero{padding:36px 16px 32px}
+  .page-hero-inner{grid-template-columns:1fr}
+  .content{padding:32px 16px 64px;grid-template-columns:1fr}
+  .sidebar{order:-1}
+  .case-cards{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:6px}
+}
+/* Secteurs dropdown */
+.nav-dropdown{position:relative}
+.nav-dropdown-toggle{padding:4px 10px;font-size:13px;color:var(--muted-fg);border-radius:4px;cursor:pointer;transition:all .12s;background:none;border:none;font-family:'Geist',-apple-system,sans-serif;display:inline-flex;align-items:center;gap:4px}
+.nav-dropdown-toggle:hover,.nav-dropdown.open .nav-dropdown-toggle{background:var(--muted);color:var(--fg);font-weight:500}
+.nav-dropdown-toggle svg{transition:transform .2s}
+.nav-dropdown.open .nav-dropdown-toggle svg{transform:rotate(180deg)}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:540px;background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.08);padding:12px;z-index:200}
+.nav-dropdown.open .nav-dropdown-menu{display:block}
+.nav-dropdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.nav-dropdown-item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:4px;text-decoration:none;color:var(--fg);font-size:13px;transition:background .12s}
+.nav-dropdown-item:hover{background:var(--muted)}
+.nav-dropdown-item-code{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;background:var(--muted);font-size:10px;font-weight:700;font-family:'Geist Mono',monospace;color:var(--fr-blue);flex-shrink:0}
+.nav-dropdown-backdrop{display:none;position:fixed;inset:0;z-index:150}
+.nav-dropdown.open .nav-dropdown-backdrop{display:block}
+
+@media(max-width:768px){
+  .nav-dropdown-menu{width:calc(100vw - 32px);left:auto;right:-60px;transform:none}
+  .nav-dropdown-grid{grid-template-columns:1fr}
+}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="/"><span class="logo-in">IN</span><span class="logo-france">France</span></a>
+  <div class="header-sep"></div>
+  <nav class="site-nav">
+    <a class="nav-link" href="/">Simulateur</a>
+    <a class="nav-link" href="/impact">Rapport d'impact</a>
+    <div class="nav-dropdown" id="secDropdown">
+      <div class="nav-dropdown-backdrop" onclick="document.getElementById('secDropdown').classList.remove('open')"></div>
+      <button class="nav-dropdown-toggle" onclick="this.parentElement.classList.toggle('open')">
+        Secteurs
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-grid">
+          <a class="nav-dropdown-item" href="/secteur/agriculture"><span class="nav-dropdown-item-code">A</span>Agriculture</a>
+          <a class="nav-dropdown-item" href="/secteur/industries-extractives"><span class="nav-dropdown-item-code">B</span>Ind. extractives</a>
+          <a class="nav-dropdown-item" href="/secteur/industrie-manufacturiere"><span class="nav-dropdown-item-code">C</span>Industrie manuf.</a>
+          <a class="nav-dropdown-item" href="/secteur/energie"><span class="nav-dropdown-item-code">D</span>Energie</a>
+          <a class="nav-dropdown-item" href="/secteur/eau-dechets"><span class="nav-dropdown-item-code">E</span>Eau et dechets</a>
+          <a class="nav-dropdown-item" href="/secteur/construction"><span class="nav-dropdown-item-code">F</span>Construction</a>
+          <a class="nav-dropdown-item" href="/secteur/commerce"><span class="nav-dropdown-item-code">G</span>Commerce</a>
+          <a class="nav-dropdown-item" href="/secteur/transports"><span class="nav-dropdown-item-code">H</span>Transports</a>
+          <a class="nav-dropdown-item" href="/secteur/hebergement-restauration"><span class="nav-dropdown-item-code">I</span>Hebergement</a>
+          <a class="nav-dropdown-item" href="/secteur/information-communication"><span class="nav-dropdown-item-code">J</span>Info. et comm.</a>
+          <a class="nav-dropdown-item" href="/secteur/finance-assurance"><span class="nav-dropdown-item-code">K</span>Finance</a>
+          <a class="nav-dropdown-item" href="/secteur/immobilier"><span class="nav-dropdown-item-code">L</span>Immobilier</a>
+          <a class="nav-dropdown-item" href="/secteur/services-specialises"><span class="nav-dropdown-item-code">M</span>Serv. specialises</a>
+          <a class="nav-dropdown-item" href="/secteur/services-administratifs"><span class="nav-dropdown-item-code">N</span>Serv. administratifs</a>
+          <a class="nav-dropdown-item" href="/secteur/administration-publique"><span class="nav-dropdown-item-code">O</span>Admin. publique</a>
+          <a class="nav-dropdown-item" href="/secteur/enseignement"><span class="nav-dropdown-item-code">P</span>Enseignement</a>
+          <a class="nav-dropdown-item" href="/secteur/sante"><span class="nav-dropdown-item-code">Q</span>Sante et social</a>
+          <a class="nav-dropdown-item" href="/secteur/arts-loisirs"><span class="nav-dropdown-item-code">R</span>Arts et loisirs</a>
+          <a class="nav-dropdown-item" href="/secteur/autres-services"><span class="nav-dropdown-item-code">S</span>Autres services</a>
+        </div>
+      </div>
+    </div>
+    <a class="nav-link active" href="/cas-usage">Cas d'usage</a>
+    <a class="nav-link" href="/methodologie">Methodologie</a>
+    <a class="nav-link" href="/a-propos">A propos</a>
+  </nav>
+  <div class="header-right">
+    <div class="chip"><div class="chip-dot"></div>API live</div>
+    <a class="btn-demo" href="/contact">Prendre rendez-vous →</a>
+  </div>
+</header>
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <div class="breadcrumb"><a href="cas-usage.html">Cas d'usage</a><span class="breadcrumb-sep">/</span><span>AFJEL</span></div>
+      <h1>Objectiver l'impact territorial d'un secteur numérique stratégique</h1>
+      <p class="hero-intro">Avec l'AFJEL, IN France a analysé l'impact économique, social et fiscal des entreprises de jeux en ligne agréées en France. Ce rapport inédit démontre leur rôle structurant dans l'économie nationale.</p>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-img">🎰</div>
+      <div class="hero-card-body">
+        <div class="hero-card-label">Client</div>
+        <div class="hero-card-client">AFJEL</div>
+        <div class="hero-card-tags"><span class="hero-card-tag">Numérique</span><span class="hero-card-tag">Fiscal</span><span class="hero-card-tag">Sport</span><span class="hero-card-tag">Fédération</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="content">
+  <div class="content-main">
+    <div class="section-block"><h2>À propos</h2><p>L'AFJEL regroupe les principaux opérateurs de jeux en ligne agréés par l'Autorité Nationale des Jeux. En 2023, ses membres ont généré un CA cumulé de 3 Mds€ et un prélèvement fiscal record de 1,65 Md€.</p></div>
+    <div class="section-block"><h2>Le défi</h2><p>Le secteur des jeux en ligne est fortement réglementé et fiscalisé. L'enjeu était de démontrer, sur une base rigoureuse, que ce secteur contribue massivement à l'économie française, bien au-delà de ses spécificités numériques.</p></div>
+    <div class="section-block"><h2>La solution</h2><p>IN France a modélisé les effets directs, indirects et induits des entreprises membres de l'AFJEL à partir de leurs données comptables, des bases SIRENE et Eurostat. L'étude mesure précisément les flux économiques, les emplois générés et les recettes fiscales.</p></div>
+    <div class="section-block"><h2>Les résultats</h2><div class="results-list"><div class="result-item"><div class="result-dot result-dot-blue"></div>4,36 Mds€ d'impact économique total</div>
+   <div class="result-item"><div class="result-dot result-dot-blue"></div>11 210 emplois générés en équivalent temps plein</div>
+   <div class="result-item"><div class="result-dot result-dot-red"></div>1,65 Md€ de fiscalité totale, soit un taux de 60%</div>
+   <div class="result-item"><div class="result-dot result-dot-red"></div>155 M€ dédiés au financement du sport</div>
+   <div class="result-item"><div class="result-dot result-dot-blue"></div>49% des emplois créés en dehors d'Île-de-France</div></div></div>
+    <div class="quote-block"><div class="quote-text">« Ce rapport nous permet de démontrer, chiffres à l'appui, que notre secteur est un pilier fiscal, économique et territorial majeur pour la France. »</div><div class="quote-author">— Nicolas Béraud, Président de l'AFJEL &amp; CEO de Betclic Group</div></div>
+    <a class="download-btn" href="https://cdn.prod.website-files.com/67233f21e4c499ef14915cfb/688fa1f6a1a40ca73fb8290b_INF_AFJEL_V0.3.pdf" target="_blank">↓ Télécharger le rapport PDF</a>
+    <div class="other-cases"><div class="other-cases-title">Autres cas d'usage</div><div class="case-cards"><a class="case-card" href="cas-usage-carbone-4.html"><div class="case-card-client">Carbone 4</div><div class="case-card-desc">Modélisation d'un acte européen sur les achats publics</div></a>
+   <a class="case-card" href="cas-usage-ministere.html"><div class="case-card-client">Ministère de l'Intérieur</div><div class="case-card-desc">Souveraineté et impact territorial des achats publics</div></a></div></div>
+  </div>
+  <div class="sidebar">
+    <div class="sidebar-card"><div class="sidebar-label">Indicateurs clés</div><div class="sidebar-stat"><span class="sidebar-stat-label">Impact économique total</span><span class="sidebar-stat-val">4,36 Mds€</span></div>
+   <div class="sidebar-stat"><span class="sidebar-stat-label">Emplois ETP générés</span><span class="sidebar-stat-val">11 210</span></div>
+   <div class="sidebar-stat"><span class="sidebar-stat-label">Fiscalité totale</span><span class="sidebar-stat-val">1,65 Md€</span></div>
+   <div class="sidebar-stat"><span class="sidebar-stat-label">Financement sport</span><span class="sidebar-stat-val">155 M€</span></div>
+   <div class="sidebar-stat"><span class="sidebar-stat-label">Emplois hors IDF</span><span class="sidebar-stat-val">49%</span></div></div>
+    <div class="sidebar-cta">
+      <div class="sidebar-cta-title">Vous aussi, mesurez votre impact</div>
+      <div class="sidebar-cta-sub">Rapport livré en 48h · 30+ indicateurs · Méthodologie indépendante</div>
+      <a class="sidebar-cta-btn" href="https://www.in-france.fr/demo" target="_blank">Demander une démo →</a>
+    </div>
+  </div>
+</div>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><span class="logo-in">IN</span><span class="logo-france">France</span></div>
+      <div class="footer-sub">Rendre visible l'impact economique des entreprises dans les territoires francais.</div>
+      <div class="footer-made">Fabrique en France · Groupe Societe.com</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <div class="footer-links">
+        <a class="footer-link" href="/">Simulateur gratuit</a>
+        <a class="footer-link" href="/impact">Rapport d'impact</a>
+        <a class="footer-link" href="/cas-usage">Cas d'usage</a>
+        <a class="footer-link" href="/methodologie">Methodologie</a>
+        <a class="footer-link" href="/a-propos">A propos</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Liens utiles</div>
+      <div class="footer-links">
+        <a class="footer-link" href="/contact">Demander une demo</a>
+        <a class="footer-link" href="https://www.linkedin.com/in/tristanmeneret/" target="_blank">LinkedIn</a>
+        <a class="footer-link" href="https://www.in-france.fr/mentions-legales" target="_blank">Mentions legales</a>
+        <a class="footer-link" href="https://www.in-france.fr/politique-confidentialite" target="_blank">Confidentialite</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; IN France 2025</span>
+    <span>Heberge en France · Donnees souveraines</span>
+  </div>
+</footer>
+</body></html>
